@@ -1,0 +1,7 @@
+<h3>Edit a New Food Item</h3>
+
+<form action="/fooditems/<%= @fooditem.id %>" method="post">
+  <input type="hidden" name="_method" value="put">
+  <input type="text" name="fooditem[name]" value="<%= @fooditem.name %>">
+  <input type="submit">
+</form>

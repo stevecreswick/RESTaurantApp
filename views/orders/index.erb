@@ -1,0 +1,13 @@
+<h3>Menu Items</h3>
+
+<a href="/orders/new">New Order Item</a>
+
+<ul>
+  <% @orders.each do |order| %>
+    <li>
+      <a href="/orders/<%= order.id %>">
+        <%= order.name %>
+      </a>
+    </li>
+  <% end %>
+</ul>

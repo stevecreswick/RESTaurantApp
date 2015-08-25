@@ -1,0 +1,9 @@
+<h3>Enjoy <%= @fooditem.name %></h3>
+
+<a href="/fooditems">All of them</a>
+<a href="/fooditems/<%= @fooditem.id %>/edit">Edit</a>
+
+<form action="/fooditems/<%= @fooditem.id %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <input type="submit" value="No Longer Available">
+</form>
