@@ -4,12 +4,46 @@
     <meta charset="utf-8">
     <title></title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="/css/styles.css">
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
   </head>
+
   <body>
-    <%= yield %>
+
+    <ul id="dropdown1" class="dropdown-content" constrainwidth="false">
+    <li><a href="/fooditems/new">Add Food Item</a></li>
+    <li><a href="/itemorders">All the Orders</a></li>
+    <li class="divider"></li>
+    <li><a href="#!">three</a></li>
+  </ul>
+    <nav>
+      <div class="nav-wrapper">
+        <a href="/" class="brand-logo">Your Restaurant</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="/parties">Tables</a></li>
+          <li><a href="/itemorders/new">New Order</a></li>
+          <li><a href="/fooditems">Menu</a></li>
+          <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Admin<i class="material-icons right">arrow_drop_down</i></a></li>
+        </ul>
+      </div>
+    </nav>
+
+
+
+
+    <!-- <div class="col s12">
+     <ul class="tabs">
+       <li class="tab col s3"><a href="../">Home</a></li>
+       <li class="tab col s3"><a class="active" href="#test2">Parties</a></li>
+       <li class="tab col s3"><a href="/../orders">Orders</a></li>
+       <li class="tab col s3"><a href="/../fooditems">Menu Items</a></li>
+     </ul>
+   </div> -->
+      <%= yield %>
+
+
+
   </body>
 </html>

@@ -1,1 +1,21 @@
-<h3>Welcome to RESTaurant Name</h3>
+<div class="container">
+  <h3>Click Table to Start</h3>
+<div class="divider"></div>
+<br />
+
+
+<form class="" action="/parties/new" method="get">
+
+<% 4.times do |i| %>
+  <div class="row section center-align">
+  <% 6.times do |x| %>
+    <div class="col s2"><input type="submit" name="table_id" value="<%= i %><%= x %>"></div>
+  <% end %>
+  </div>
+
+
+
+<% end %>
+</form>
+
+</div>

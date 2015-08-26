@@ -1,6 +1,43 @@
 <h3>Create a New Food Item</h3>
 
-<form action="/fooditems" method="post">
-  <input type="text" name="fooditem[name]" placeholder="dish name">
-  <input type="submit">
-</form>
+
+<div class="row">
+    <form class="col s12" action="/fooditems" method="post">
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="foodname" name="fooditem[name]" type="text" class="validate">
+          <label for="foodname">Dish Name</label>
+        </div>
+        <div class="input-field col s3">
+          <label for="price">Price</label>
+          <input id="price" type="integer" class="validate" name="fooditem[price]">
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s4">
+          <input name="fooditem[course]" type="text" id="course" class="validate">
+          <label for="course">Course</label>
+        </div>
+        <div class="input-field col s4">
+          <input name="fooditem[protein]" id="protein" type="text" class="validate">
+          <label for="protein">Protein</label>
+        </div>
+        <div class="input-field col s4">
+          <label for="fooditem[spice_level]">Spice</label>
+          <p class="range-field">
+            <input type="range" name="fooditem[spice_level]" min="0" max="5" />
+
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input name="fooditem[description]" type="text" class="validate">
+          <label for="description">Description</label>
+        </div>
+      </div>
+      <div class="row">
+      <input type="submit">
+      </div>
+    </form>
+  </div>

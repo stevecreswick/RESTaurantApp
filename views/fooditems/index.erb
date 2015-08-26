@@ -1,13 +1,30 @@
+<div class="container fooditems">
+
 <h3>Menu Items</h3>
 
 <a href="/fooditems/new">New Food Item</a>
 
-<ul>
-  <% @fooditems.each do |fooditem| %>
-    <li>
-      <a href="/fooditems/<%= fooditem.id %>">
-        <%= fooditem.name %>
-      </a>
-    </li>
-  <% end %>
-</ul>
+<table class="bordered hoverable responsive-table">
+        <thead>
+          <tr>
+              <th data-field="name">Name</th>
+              <th data-field="spice_level">Spiciness</th>
+              <th data-field="price">Price</th>
+              <th data-field="description">Description</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <% @fooditems.each do |fooditem| %>
+          <tr>
+            <td><a href="/fooditems/<%= fooditem.id %>">
+            <%= fooditem.name %></a></td>
+            <td><%= fooditem.spice_level %></td>
+            <td><%= fooditem.price %></td>
+            <td><%= fooditem.description %></td>
+          </tr>
+          <% end %>
+        </tbody>
+</table>
+
+</div>

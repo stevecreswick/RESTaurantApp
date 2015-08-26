@@ -1,0 +1,8 @@
+
+<a href="/parties">All of them</a>
+<a href="/parties/<%= @party.table_id %>/edit">Edit</a>
+
+<form action="/parties/<%= @party.table_id %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <input type="submit" value="Done">
+</form>

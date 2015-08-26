@@ -1,3 +1,30 @@
 body {
-  background: whitesmoke;
+   display: flex;
+   min-height: 100vh;
+   flex-direction: column;
+ }
+
+ .container {
+ }
+
+
+.col {
+}
+
+
+ main {
+   flex: 1 0 auto;
+ }
+
+.table-round {
+  background: black;
+  text-align: center;
+  color: white;
+}
+
+.table-square {
+  background: red;
+  height: 100%;
+  width: 50%;
+  text-align: center;
 }

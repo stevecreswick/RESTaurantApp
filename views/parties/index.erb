@@ -1,0 +1,22 @@
+<div class="container parties">
+
+<a href="/parties/new">New Party</a>
+
+<table class="bordered hoverable responsive-table">
+        <thead>
+          <tr>
+              <th data-field="Table#">Table Number</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <% @parties.each do |party| %>
+          <tr>
+            <td><a href="/parties/<%= party.id %>">
+            <%= party.table_id %></a></td>
+          </tr> -->
+          <% end %>
+        </tbody>
+</table>
+
+</div>

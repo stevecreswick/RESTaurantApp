@@ -1,4 +1,4 @@
-class Order < ActiveRecord::Base
+class Itemorder < ActiveRecord::Base
   has_many :fooditems
   belongs_to :party
 end
