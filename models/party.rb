@@ -1,4 +1,4 @@
 class Party < ActiveRecord::Base
-  has_one :itemorder
-  has_many :fooditems, through: :itemorder
+  has_many :itemorders
+  has_many :fooditems, through: :itemorders
 end

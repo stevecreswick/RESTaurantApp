@@ -1,8 +1,17 @@
+<div class="container">
 
-<a href="/parties">All of them</a>
-<a href="/parties/<%= @party.table_id %>/edit">Edit</a>
 
-<form action="/parties/<%= @party.table_id %>" method="post">
+<h3>Show me a Party</h3>
+<a href="/parties">All Parties</a>
+<a href="/parties/<%= @party.id %>/edit">Edit</a>
+
+<h5>Seated at table:  <%= @party.table_id %> </h5>
+
+<form action="/parties/<%= @party.id %>" method="post">
   <input type="hidden" name="_method" value="delete">
-  <input type="submit" value="Done">
+  <input type="submit" value="DELETE THIS PARTY">
 </form>
+
+<%= @party.itemorders.name %>
+
+</div>

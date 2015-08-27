@@ -1,3 +1,5 @@
+<div class="container">
+
 <h3><%= @fooditem.name %></h3>
 
 <a href="/fooditems">All of them</a>
@@ -8,9 +10,10 @@
   <input type="submit" value="No Longer Available">
 </form>
 
-<table class="bordered hoverable responsive-table">
+<table class="bordered responsive-table">
         <thead>
           <tr>
+              <th data-field="id">Id</th>
               <th data-field="name">Name</th>
               <th data-field="spice_level">Spiciness</th>
               <th data-field="price">Price</th>
@@ -20,6 +23,7 @@
 
         <tbody>
           <tr>
+            <td><%= @fooditem.id %></td>
             <td><%= @fooditem.name %></td>
             <td><%= @fooditem.spice_level %></td>
             <td><%= @fooditem.price %></td>

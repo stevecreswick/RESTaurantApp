@@ -5,17 +5,21 @@
 
 
 <form class="" action="/parties/new" method="get">
+  <% a = 0 %>
 
 <% 4.times do |i| %>
   <div class="row section center-align">
   <% 6.times do |x| %>
-    <div class="col s2"><input type="submit" name="table_id" value="<%= i %><%= x %>"></div>
+    <div class="col s2"><input type="submit" name="party[table_id]" value=<%= a %>></div>
+    <% a += 1 %>
   <% end %>
+
   </div>
 
-
-
 <% end %>
+
 </form>
+
+
 
 </div>

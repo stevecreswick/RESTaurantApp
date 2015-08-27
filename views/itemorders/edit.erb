@@ -1,7 +1,18 @@
 <h3>Edit a New Order Item</h3>
 
-<form action="/Itemorders/<%= @itemorder.id %>" method="post">
+<form action="/itemorders/<%= @itemorder.id %>" method="post">
   <input type="hidden" name="_method" value="put">
-  <input type="text" name="itemorder[name]" value="<%= @itemorder.name %>">
+  <input type="text" name="itemorder[party_id]" value="<%= @itemorder.party_id %>">
+
+  <% @fooditems.each do |fooditem| %>
+
+<div class="row">
+  <div class="input-field col s6">
+   <input type="checkbox" name="itemorder[fooditem_id]" value="<%=fooditem.id%>" id="<%=fooditem.id%>">
+   <label for="<%=fooditem.id%>">  <%=  fooditem.name %></label>
+   <% end %>
+
+ </div>
+</div>
   <input type="submit">
 </form>

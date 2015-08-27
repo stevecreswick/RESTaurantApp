@@ -8,31 +8,30 @@ class PartiesController < ApplicationController
   end
 
   # NEW
+  # get '/new' do
+  #   erb :'parties/new'
+  # end
+
   get '/new' do
     erb :'parties/new'
   end
 
-  get '/new/:id' do
-    @table = Party.create(table_id: params[:id])
-    erb :'parties/new'
-  end
-
   # CREATE
-  post '/:id' do
-    party = Party.find(table_id: params[:id]).update(params[:party])
-
-    redirect "/parties/#{ party.table_id }"
+  post '/' do
+    party = Party.create(params[:party])
+    redirect "/parties/#{ party.id }"
   end
 
   # SHOW
   get '/:id' do
-    @party = Party.find(table_id: params[:id])
+    @party = Party.find(params[:id])
     erb :'/parties/show'
   end
 
   # EDIT
   get '/:id/edit' do
     @party = Party.find(params[:id])
+    @itemorder = @party.itemorders
     erb :'/parties/edit'
   end
 

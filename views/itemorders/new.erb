@@ -1,6 +1,23 @@
-<h3>Create a New Order</h3>
+<div class="container">
+  <h3>Create a New Order</h3>
 
-<form action="/itemorders" method="post">
-  <input type="text" name="itemorder[name]" placeholder="itemorder">
-  <input type="submit">
-</form>
+  <form action="/itemorders" method="post">
+
+    <% @parties.each do |party| %>
+    <div class="row">
+    <input type="checkbox" name="itemorder[party_id]" value="<%= party.id %>" id ="<%= party.table_id %>"  />
+    <label for="<%= party.table_id %>"><%= party.table_id %></label>
+    </div>
+      <% end %>
+
+    <% @fooditems.each do |fooditem| %>
+    <input type="checkbox" name="fooditems[]" value="<%= fooditem.id %>" id="<%= fooditem.id %>">
+    <label for="<%= fooditem.id %>"><%= fooditem.name %></label>
+    <% end %>
+
+    <input type="submit" value="Order">
+
+  </form>
+
+
+</div>

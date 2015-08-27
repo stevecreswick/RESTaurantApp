@@ -5,7 +5,14 @@
 <table class="bordered hoverable responsive-table">
         <thead>
           <tr>
+              <th data-field="Table#">Check Number</th>
               <th data-field="Table#">Table Number</th>
+              <th data-field="Table#">Table Location</th>
+              <th data-field="Table#">Number of Guests</th>
+              <th data-field="Table#">Bill</th>
+              <th data-field="Table#">Paid Bill</th>
+
+
           </tr>
         </thead>
 
@@ -13,8 +20,14 @@
         <% @parties.each do |party| %>
           <tr>
             <td><a href="/parties/<%= party.id %>">
-            <%= party.table_id %></a></td>
-          </tr> -->
+<%= party.id %> </a></td>
+            <td>
+            <%= party.table_id %></td>
+            <td><%= party.table_location %></td>
+            <td><%= party.number_of_guests %></td>
+            <td>$ <%= party.bill %></td>
+            <td><%= party.paid_bill %></td>
+          </tr>
           <% end %>
         </tbody>
 </table>

@@ -1,18 +1,36 @@
 <div class="container">
 
 
-<h3>Menu Items</h3>
+<h3>Orders</h3>
 
-<a href="/itemorders/new">New Order Item</a>
+<a href="/itemorders/new">New Order</a>
 
-<ul>
-  <% @itemorders.each do |itemorder| %>
-    <li>
-      <a href="/itemorders/<%= itemorder.id %>">
-        <%= itemorder.name %>
-      </a>
-    </li>
-  <% end %>
-</ul>
+
+
+<table class="bordered responsive-table">
+        <thead>
+          <tr>
+              <th data-field="Table#">Order ID</th>
+              <th data-field="Table#">Party ID</th>
+              <th data-field="Table#">Food Item Number</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @itemorders.each do |itemorder| %>
+          <tr>
+            <td><a href="/itemorders/<%= itemorder.id %>">
+<%= itemorder.id %> </a></td>
+            <td>
+            <%= itemorder.party_id %></td>
+            <td>
+            <%= itemorder.fooditem_id %></td>
+            <td>
+              <%= itemorder.fooditem.name %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+</table>
 
 </div>

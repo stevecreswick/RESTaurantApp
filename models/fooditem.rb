@@ -1,3 +1,4 @@
 class Fooditem < ActiveRecord::Base
-  belongs_to :itemorder
+  has_many :itemorders
+  has_many :parties, through: :itemorders
 end

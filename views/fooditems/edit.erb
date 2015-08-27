@@ -1,7 +1,49 @@
-<h3>Edit a New Food Item</h3>
 
-<form action="/fooditems/<%= @fooditem.id %>" method="post">
-  <input type="hidden" name="_method" value="put">
-  <input type="text" name="fooditem[name]" value="<%= @fooditem.name %>">
-  <input type="submit">
-</form>
+<div class="container">
+
+<h3>Edit a Food Item</h3>
+
+
+<div class="row">
+  <form class="col s12" action="/fooditems/<%= @fooditem.id %>" method="post">
+    <input type="hidden" name="_method" value="put">
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="foodname" name="fooditem[name]" value="<%= @fooditem.name %>">
+          <label for="foodname">Dish Name</label>
+        </div>
+        <div class="input-field col s3">
+          <label for="price">Price</label>
+          <input id="price" type="integer" name="fooditem[price]" value="<%= @fooditem.price %>">
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s4">
+          <input name="fooditem[course]" type="text" value="<%= @fooditem.course %>">
+          <label for="course">Course</label>
+        </div>
+        <div class="input-field col s4">
+          <input name="fooditem[protein]" value="<%= @fooditem.protein %>">
+          <label for="protein">Protein</label>
+        </div>
+        <div class="input-field col s4">
+          <label for="fooditem[spice_level]">Spice</label>
+          <p class="range-field">
+            <input type="range" name="fooditem[spice_level]" min="0" max="5" value="<%= @fooditem.spice_level %>" />
+
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input name="fooditem[description]" value="<%= @fooditem.description %>">
+          <label for="description">Description</label>
+        </div>
+      </div>
+      <div class="row">
+      <input type="submit">
+      </div>
+    </form>
+  </div>
+
+</div>

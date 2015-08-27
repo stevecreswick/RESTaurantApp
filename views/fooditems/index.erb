@@ -7,6 +7,7 @@
 <table class="bordered hoverable responsive-table">
         <thead>
           <tr>
+              <th data-field="id">Id</th>
               <th data-field="name">Name</th>
               <th data-field="spice_level">Spiciness</th>
               <th data-field="price">Price</th>
@@ -17,6 +18,7 @@
         <tbody>
         <% @fooditems.each do |fooditem| %>
           <tr>
+            <td><%= fooditem.id %></td>
             <td><a href="/fooditems/<%= fooditem.id %>">
             <%= fooditem.name %></a></td>
             <td><%= fooditem.spice_level %></td>
