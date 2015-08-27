@@ -1,6 +1,8 @@
 require 'bundler'
 Bundler.require()
 
+require "active_support/all"
+
 require './models/fooditem'
 require './models/itemorder'
 require './models/party'

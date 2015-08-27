@@ -13,12 +13,17 @@
               <th data-field="Table#">Order ID</th>
               <th data-field="Table#">Party ID</th>
               <th data-field="Table#">Food Item Number</th>
+              <th data-field="Table#">Food Item</th>
+              <th data-field="Table#">Time Elapsed</th>
+
           </tr>
         </thead>
 
         <tbody>
           <% @itemorders.each do |itemorder| %>
-          <tr>
+          <% time_elapsed = ((Time.now - itemorder.created_at)/60).round %>
+
+          <tr class="ordertime" data-time="<%=time_elapsed%>">
             <td><a href="/itemorders/<%= itemorder.id %>">
 <%= itemorder.id %> </a></td>
             <td>
@@ -28,7 +33,11 @@
             <td>
               <%= itemorder.fooditem.name %>
             </td>
+            <td>
+              <%= ((Time.now - itemorder.created_at)/60).round %> min
+            </td>
           </tr>
+
           <% end %>
         </tbody>
 </table>

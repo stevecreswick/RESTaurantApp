@@ -1,3 +1,4 @@
+
 <div class="container fooditems">
 
 <h3>Menu Items</h3>
@@ -22,7 +23,7 @@
             <td><a href="/fooditems/<%= fooditem.id %>">
             <%= fooditem.name %></a></td>
             <td><%= fooditem.spice_level %></td>
-            <td><%= fooditem.price %></td>
+            <td><%= ActiveSupport::NumberHelper.number_to_currency(fooditem.price) %></td>
             <td><%= fooditem.description %></td>
           </tr>
           <% end %>

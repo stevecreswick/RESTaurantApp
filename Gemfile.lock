@@ -47,6 +47,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activesupport
   pg
   pry
   rake

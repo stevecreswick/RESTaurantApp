@@ -1,17 +1,61 @@
 <div class="container">
+<div class="row center-align">
+  <h5>Your RESTaurant Here</h5>
+</div>
+<div class="row center-align">
+  <div class="col s4">
+    <p>Table:  <%= @party.table_id %> </p>
+  </div>
+  <div class="col s4">
+    <p>Check Number: <%= @party.id %></p>
+  </div>
+  <div class="col s4">
+    <p>Number of Guests: <%= @party.number_of_guests %></p>
+  </div>
+</div>
+
+<table class="bordered">
+        <thead>
+          <tr>
+              <th data-field="Table#">Items Ordered</th>
+              <th data-field="Table#" class="right-align">Price</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @party.fooditems.each do |fooditem| %>
+          <tr>
+          <td><%= fooditem.name %></td>
+          <td class="right-align"><%= ActiveSupport::NumberHelper.number_to_currency(fooditem.price )%></td>
+          <% end %>
+          </tr>
+
+        </tbody>
+</table>
+
+<div class="divider"></div>
+<div class="section right-align">
+  <p>Food total:  <%= ActiveSupport::NumberHelper.number_to_currency(@party.bill) %></p>
+  <p>Tax:  <%= ActiveSupport::NumberHelper.number_to_currency(@tax) %></p>
+  <strong>Total : <%= ActiveSupport::NumberHelper.number_to_currency((@party.bill + @tax)) %> </strong>
+</div>
+<div class="divider"></div>
+<div class="section right-align">
+  <p>Total (18% Gratuity):   <%= ActiveSupport::NumberHelper.number_to_currency((@party.bill + @tax + @eighteen_percent)) %></p>
+  <p>Total (20% Gratuity):   <%= ActiveSupport::NumberHelper.number_to_currency((@party.bill + @tax + @twenty_percent)) %></p>
+  <p>Total (25% Gratuity):   <%= ActiveSupport::NumberHelper.number_to_currency((@party.bill + @tax + @twentyfive_percent)) %></p>
+</div>
 
 
-<h3>Show me a Party</h3>
-<a href="/parties">All Parties</a>
+<br><br>
+
+
 <a href="/parties/<%= @party.id %>/edit">Edit</a>
 
-<h5>Seated at table:  <%= @party.table_id %> </h5>
 
 <form action="/parties/<%= @party.id %>" method="post">
   <input type="hidden" name="_method" value="delete">
   <input type="submit" value="DELETE THIS PARTY">
 </form>
-
-<%= @party.itemorders.name %>
 
 </div>

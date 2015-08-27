@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150826003109) do
+ActiveRecord::Schema.define(version: 20150827180450) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,22 +21,26 @@ ActiveRecord::Schema.define(version: 20150826003109) do
     t.string  "course"
     t.string  "protein"
     t.integer "spice_level"
-    t.integer "price"
+    t.decimal "price"
     t.text    "description"
   end
 
   create_table "itemorders", force: :cascade do |t|
-    t.integer "fooditem_id"
-    t.integer "party_id"
+    t.integer  "fooditem_id"
+    t.integer  "party_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "parties", force: :cascade do |t|
-    t.integer "itemorder_id"
-    t.integer "table_id"
-    t.string  "table_location"
-    t.integer "number_of_guests"
-    t.integer "bill"
-    t.boolean "paid_bill"
+    t.integer  "itemorder_id"
+    t.integer  "table_id"
+    t.string   "table_location"
+    t.integer  "number_of_guests"
+    t.decimal  "bill"
+    t.boolean  "paid_bill"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

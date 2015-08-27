@@ -5,8 +5,8 @@
 
     <% @parties.each do |party| %>
     <div class="row">
-    <input type="checkbox" name="itemorder[party_id]" value="<%= party.id %>" id ="<%= party.table_id %>"  />
-    <label for="<%= party.table_id %>"><%= party.table_id %></label>
+    <input type="checkbox" name="party_id" value="<%= party.id %>" id ="<%= party.id %>"  />
+    <label for="<%= party.id %>"><%= party.table_id %></label>
     </div>
       <% end %>
 

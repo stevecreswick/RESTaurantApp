@@ -1,5 +1,6 @@
 class FoodItemsController < ApplicationController
 
+  require "active_support/all"
 
   # INDEX
   get '/' do

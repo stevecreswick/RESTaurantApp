@@ -6,3 +6,4 @@ gem 'pg'
 gem 'rake'
 
 gem 'pry'
+gem 'activesupport'

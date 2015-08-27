@@ -4,8 +4,9 @@
 
 <form action="/parties/<%= @party.id %>" method="post">
   <input type="hidden" name="_method" value="put">
-  <input type="text" name="party[table_id]" value="<%= @party.table_id %>">
-  <input type="text" name="party[itemorder_id]" value="">
+  <input type="text" name="party[table_id]" value="<%= @party.table_id %>" placeholder="Table Number">
+  <input type="text" name="party[bill]" value="<%= @party.bill %>">
+  <input type="text" name="party[paid_bill]" value="<%= @party.paid_bill %>">
   <input type="submit">
 </form>
 

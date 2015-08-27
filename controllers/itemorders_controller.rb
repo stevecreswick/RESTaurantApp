@@ -17,18 +17,23 @@ class ItemOrdersController < ApplicationController
   # CREATE
   post '/' do
 
-  # {"order"=>{"party_id"=>"7"}, "inventory_items"=>["10", "11"]}
   party_id = params['party_id']
   fooditems =  params['fooditems']
 
-  fooditems.each do |fooditem|
-    Itemorder.create({
-      party_id: party_id,
-      fooditem_id: fooditem
-      })
-  end
+    fooditems.each do |fooditem|
+      Itemorder.create({
+        fooditem_id: fooditem,
+        party_id: party_id
+        })
 
-  # Order.create(params[:order])
+        party = Party.find(party_id)
+        food = Fooditem.find(fooditem)
+        party.bill += food.price
+        party.update({
+          bill: party.bill
+        })
+    end
+
   redirect '/itemorders'
   end
 

@@ -1,5 +1,6 @@
 class PartiesController < ApplicationController
 
+  require 'active_support/all'
 
   # INDEX
   get '/' do
@@ -25,6 +26,10 @@ class PartiesController < ApplicationController
   # SHOW
   get '/:id' do
     @party = Party.find(params[:id])
+    @tax = @party.bill * 0.08875
+    @eighteen_percent = @party.bill * 0.18
+    @twenty_percent = @party.bill * 0.20
+    @twentyfive_percent =  @party.bill * 0.25
     erb :'/parties/show'
   end
 
