@@ -5,7 +5,6 @@
           <tr>
               <th data-field="Table#">Check Number</th>
               <th data-field="Table#">Table Number</th>
-              <th data-field="Table#">Table Location</th>
               <th data-field="Table#">Number of Guests</th>
               <th data-field="Table#">Bill</th>
               <th data-field="Table#">Pay Bill</th>
@@ -20,8 +19,7 @@
             <td><a href="/parties/<%= party.id %>">
 <%= party.id %> </a></td>
             <td>
-            <%= party.table_id %></td>
-            <td><%= party.table_location %></td>
+            <%= party.restaurant_table_id %></td>
             <td><%= party.number_of_guests %></td>
             <td class="party-bill" data-paid="<%=party.paid_bill%>"><%= ActiveSupport::NumberHelper.number_to_currency(party.bill)%></td>
             <td>
@@ -44,7 +42,6 @@
           <tr>
               <th data-field="Table#">Check Number</th>
               <th data-field="Table#">Table Number</th>
-              <th data-field="Table#">Table Location</th>
               <th data-field="Table#">Number of Guests</th>
               <th data-field="Table#">Bill</th>
 
@@ -57,8 +54,7 @@
             <td><a href="/parties/<%= party.id %>">
 <%= party.id %> </a></td>
             <td>
-            <%= party.table_id %></td>
-            <td><%= party.table_location %></td>
+            <%= party.restaurant_table_id %></td>
             <td><%= party.number_of_guests %></td>
             <td class="party-bill" data-paid="<%=party.paid_bill%>"><%= ActiveSupport::NumberHelper.number_to_currency(party.bill)%></td>
           </tr>

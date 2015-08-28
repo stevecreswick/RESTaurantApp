@@ -30,7 +30,12 @@ class PartiesController < ApplicationController
   # CREATE
   post '/' do
     party = Party.create(params[:party])
-    redirect "/parties/#{ party.id }"
+    table = RestaurantTable.find(params[:table_id]);
+    table.update(params[:restaurant_table]);
+    table.update({
+      party_id: party.id
+      })
+    redirect "/parties/#{ party.id }/edit"
   end
 
   # SHOW

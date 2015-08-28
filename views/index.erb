@@ -3,23 +3,24 @@
 <div class="divider"></div>
 <br />
 
+<h3>Tables</h3>
+<% @tables.each do |table| %>
+<% if (table.is_occupied == false) %>
+<form action="/parties" method="post">
+  <input type="hidden" name="party[restaurant_table_id]" value ="<%= table.id %>">
+  <input type="hidden" name="party[bill]" value=0>
+  <input type="hidden" name="party[paid_bill]" value=false>
+  <input type="hidden" name="restaurant_table[is_occupied]" value=true>
+  <input type="hidden" name="table_id" value="<%= table.id %>">
+  <input type="submit" value="<%= table.id %>">
+  </form>
+<% elsif (table.is_occupied == true) %>
+<form action="/itemorders/new" method="get">
+  <input type="submit" value="<%= table.id %>" style="background: red">
+  </form>
+<%end%>
 
-<form class="" action="/parties/new" method="get">
-  <% a = 0 %>
-
-<% 4.times do |i| %>
-  <div class="row section center-align">
-  <% 6.times do |x| %>
-    <div class="col s2"><input type="submit" name="party[table_id]" value=<%= a %>></div>
-    <% a += 1 %>
-  <% end %>
-
-  </div>
-
-<% end %>
-
-</form>
-
+<%end%>
 
 
 </div>

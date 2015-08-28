@@ -1,4 +1,4 @@
 class RestaurantTable < ActiveRecord::Base
-  has_many :parties
+  has_one :parties
   has_many :itemorders, through: :parties
 end

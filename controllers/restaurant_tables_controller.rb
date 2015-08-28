@@ -6,6 +6,17 @@ class RestaurantTablesController < ApplicationController
   get '/' do
     @tables = RestaurantTable.all
 
+    @seatedtables = []
+    @emptytables =[]
+
+    @tables.each do |table|
+      if (table.is_occupied == true)
+        @seatedtables.push(table)
+      elsif (table.is_occupied  == false)
+        @emptytables.push(table)
+      end
+    end
+
     erb :'restaurant_tables/index'
   end
 
@@ -16,7 +27,7 @@ class RestaurantTablesController < ApplicationController
 
   # CREATE
   post '/' do
-    party = RestaurantTable.create(params[:restaurant_table])
+    table = RestaurantTable.create(params[:restaurant_table])
     redirect "/"
   end
 
@@ -26,7 +37,6 @@ class RestaurantTablesController < ApplicationController
     erb :'/restaurant_tables/show'
   end
 
-  # EDIT
   get '/:id/edit' do
     @table = RestaurantTable.find(params[:id])
     erb :'/restaurant_tables/edit'

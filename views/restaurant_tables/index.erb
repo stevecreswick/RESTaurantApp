@@ -1,3 +1,53 @@
-<% @tables.each do |table| %>
-  <%= table.id %>
-<% end %>
+<div class="container">
+
+<h3>Active Tables</h3>
+<table class="bordered hoverable responsive-table">
+        <thead>
+          <tr>
+              <th data-field="Table#">Table Number</th>
+              <th data-field="Table#">Current Check Number</th>
+              <th data-field="Table#">Table Location</th>
+              <th data-field="Table#">Seated</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <% @seatedtables.each do |table| %>
+          <tr>
+            <td><a href="/restaurant_tables/<%= table.id %>">
+<%= table.id %> </a></td>
+            <td>
+            <%= table.party_id %></td>
+            <td><%= table.table_location %></td>
+            <td><%= table.is_occupied %></td>
+          </tr>
+          <% end %>
+        </tbody>
+</table>
+
+
+<h3>Inactive Tables</h3>
+<table class="bordered hoverable responsive-table">
+        <thead>
+          <tr>
+            <th data-field="Table#">Table Number</th>
+            <th data-field="Table#">Current Check Number</th>
+            <th data-field="Table#">Table Location</th>
+            <th data-field="Table#">Seated</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <% @emptytables.each do |table| %>
+          <tr>
+            <td><a href="/restaurant_tables/<%= table.id %>">
+<%= table.id %> </a></td>
+            <td>
+            <%= table.party_id %></td>
+            <td><%= table.table_location %></td>
+            <td><%= table.is_occupied  %></td>
+          <% end %>
+        </tbody>
+</table>
+
+</div>
