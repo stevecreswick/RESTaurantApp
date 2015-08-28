@@ -4,6 +4,16 @@ class ItemOrdersController < ApplicationController
   # INDEX
   get '/' do
     @itemorders = Itemorder.all
+    @activeorders = []
+    @inactiveorders = []
+
+    @itemorders.each do |itemorder|
+      if (itemorder.is_active == true)
+        @activeorders.push(itemorder)
+      elsif (itemorder.is_active == false)
+        @inactiveorders.push(itemorder)
+      end
+    end
     erb :'itemorders/index'
   end
 
@@ -23,7 +33,8 @@ class ItemOrdersController < ApplicationController
     fooditems.each do |fooditem|
       Itemorder.create({
         fooditem_id: fooditem,
-        party_id: party_id
+        party_id: party_id,
+        is_active: true
         })
 
         party = Party.find(party_id)
@@ -54,7 +65,7 @@ class ItemOrdersController < ApplicationController
   put '/:id' do
     itemorder = Itemorder.find(params[:id])
     itemorder.update(params[:itemorder])
-    redirect "/itemorders/#{itemorder.id}"
+    redirect "/itemorders"
   end
 
   # DESTROY

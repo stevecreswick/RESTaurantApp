@@ -5,6 +5,16 @@ class PartiesController < ApplicationController
   # INDEX
   get '/' do
     @parties = Party.all
+    @activeparties = []
+    @inactiveparties =[]
+
+    @parties.each do |party|
+      if (party.paid_bill == false)
+        @activeparties.push(party)
+      elsif (party.paid_bill  == true)
+        @inactiveparties.push(party)
+      end
+    end
     erb :'parties/index'
   end
 

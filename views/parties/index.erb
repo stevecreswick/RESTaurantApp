@@ -15,7 +15,39 @@
         </thead>
 
         <tbody>
-        <% @parties.each do |party| %>
+        <% @activeparties.each do |party| %>
+          <tr>
+            <td><a href="/parties/<%= party.id %>">
+<%= party.id %> </a></td>
+            <td>
+            <%= party.table_id %></td>
+            <td><%= party.table_location %></td>
+            <td><%= party.number_of_guests %></td>
+            <td class="party-bill" data-paid="<%=party.paid_bill%>"><%= ActiveSupport::NumberHelper.number_to_currency(party.bill)%></td>
+            <td><%= party.paid_bill %></td>
+          </tr>
+          <% end %>
+        </tbody>
+</table>
+
+
+<h3>Inactive Parties</h3>
+<table class="bordered hoverable responsive-table">
+        <thead>
+          <tr>
+              <th data-field="Table#">Check Number</th>
+              <th data-field="Table#">Table Number</th>
+              <th data-field="Table#">Table Location</th>
+              <th data-field="Table#">Number of Guests</th>
+              <th data-field="Table#">Bill</th>
+              <th data-field="Table#">Paid Bill</th>
+
+
+          </tr>
+        </thead>
+
+        <tbody>
+        <% @inactiveparties.each do |party| %>
           <tr>
             <td><a href="/parties/<%= party.id %>">
 <%= party.id %> </a></td>

@@ -5,8 +5,9 @@
 
 <a href="/itemorders/new">New Order</a>
 
-
-
+<div class="row">
+  <h5>Active Orders</h5>
+</div>
 <table class="bordered responsive-table">
         <thead>
           <tr>
@@ -15,15 +16,15 @@
               <th data-field="Table#">Food Item Number</th>
               <th data-field="Table#">Food Item</th>
               <th data-field="Table#">Time Elapsed</th>
-
+              <th data-field="Table#">Order Up</th>
           </tr>
         </thead>
 
         <tbody>
-          <% @itemorders.each do |itemorder| %>
+        <% @activeorders.each do |itemorder| %>
           <% time_elapsed = ((Time.now - itemorder.created_at)/60).round %>
 
-          <tr class="ordertime" data-time="<%=time_elapsed%>">
+          <tr class="ordertime" data-time="<%=time_elapsed%>" data-active="<%=itemorder.is_active%>">
             <td><a href="/itemorders/<%= itemorder.id %>">
 <%= itemorder.id %> </a></td>
             <td>
@@ -36,10 +37,50 @@
             <td>
               <%= ((Time.now - itemorder.created_at)/60).round %> min
             </td>
+            <td>
+              <form class="" action="/itemorders/<%= itemorder.id %>" method="post">
+                <input type="hidden" name="_method" value="put">
+                <input type="hidden" name="itemorder[id]" value="<%= itemorder.id %>">
+                <input type="hidden" name="itemorder[is_active]" value="false">
+                <input type="submit" value="Clear">
+              </form>
+            </td>
           </tr>
-
           <% end %>
         </tbody>
 </table>
+
+<div class="row">
+  <h5>Inactive Orders</h5>
+</div>
+<table class="bordered responsive-table">
+        <thead>
+          <tr>
+              <th data-field="Table#">Order ID</th>
+              <th data-field="Table#">Party ID</th>
+              <th data-field="Table#">Food Item Number</th>
+              <th data-field="Table#">Food Item</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <% @inactiveorders.each do |itemorder| %>
+          <% time_elapsed = ((Time.now - itemorder.created_at)/60).round %>
+
+          <tr class="ordertime" data-time="<%=time_elapsed%>" data-active="<%=itemorder.is_active%>">
+            <td><a href="/itemorders/<%= itemorder.id %>">
+<%= itemorder.id %> </a></td>
+            <td>
+            <%= itemorder.party_id %></td>
+            <td>
+            <%= itemorder.fooditem_id %></td>
+            <td>
+              <%= itemorder.fooditem.name %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+</table>
+
 
 </div>
