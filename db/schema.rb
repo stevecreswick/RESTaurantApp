@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150827230804) do
+ActiveRecord::Schema.define(version: 20150828151645) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,15 @@ ActiveRecord::Schema.define(version: 20150827230804) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "is_active"
+  end
+
+  create_table "restaurant_tables", force: :cascade do |t|
+    t.integer  "party_id"
+    t.integer  "server_id"
+    t.string   "table_location"
+    t.boolean  "is_occupied"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

@@ -13,7 +13,7 @@ $( document ).ready(function() {
 
   //check if Bill is paid
   checkBillPaid();
-
+  colorBillGreen();
 });
 
 
@@ -36,16 +36,31 @@ function checkTimes() {
     }
 };
 
-function checkBillPaid() {
-
+function checkBillPaid(){
   partyBill = $('.party-bill');
+
   for (var i = 0; i < partyBill.length; i++) {
-    singleBill = partyBill.eq(i);
-    if (singleBill.data('paid') === true){
-      singleBill.css({'color': 'green'});
-    } else {
-      console.log('not paid');
+    singleBill = partyBill.eq(i).data('paid');
+    onScreenElement = partyBill.eq(i);
+
+    if (singleBill === true){
+      colorBillGreen(onScreenElement);
+      console.log(onScreenElement)
+    } else if (singleBill === false) {
+      colorBillRed(onScreenElement);
+      console.log(onScreenElement)
+
     }
   }
 
+}
+
+function colorBillGreen(singleBill) {
+      console.log(singleBill);
+      singleBill.css({'color': 'green'});
+};
+
+function colorBillRed(singleBill) {
+      console.log(singleBill);
+      singleBill.css({'color': 'red'});
 };

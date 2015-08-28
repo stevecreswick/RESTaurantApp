@@ -8,7 +8,7 @@
               <th data-field="Table#">Table Location</th>
               <th data-field="Table#">Number of Guests</th>
               <th data-field="Table#">Bill</th>
-              <th data-field="Table#">Paid Bill</th>
+              <th data-field="Table#">Pay Bill</th>
 
 
           </tr>
@@ -24,7 +24,14 @@
             <td><%= party.table_location %></td>
             <td><%= party.number_of_guests %></td>
             <td class="party-bill" data-paid="<%=party.paid_bill%>"><%= ActiveSupport::NumberHelper.number_to_currency(party.bill)%></td>
-            <td><%= party.paid_bill %></td>
+            <td>
+              <form class="" action="/parties/<%= party.id %>" method="post">
+                <input type="hidden" name="_method" value="put">
+                <input type="hidden" name="party[id]" value="<%= party.id %>">
+                <input type="hidden" name="party[paid_bill]" value="true">
+                <input type="submit" value="Pay Bill">
+              </form>
+            </td>
           </tr>
           <% end %>
         </tbody>
@@ -40,8 +47,6 @@
               <th data-field="Table#">Table Location</th>
               <th data-field="Table#">Number of Guests</th>
               <th data-field="Table#">Bill</th>
-              <th data-field="Table#">Paid Bill</th>
-
 
           </tr>
         </thead>
@@ -56,7 +61,6 @@
             <td><%= party.table_location %></td>
             <td><%= party.number_of_guests %></td>
             <td class="party-bill" data-paid="<%=party.paid_bill%>"><%= ActiveSupport::NumberHelper.number_to_currency(party.bill)%></td>
-            <td><%= party.paid_bill %></td>
           </tr>
           <% end %>
         </tbody>

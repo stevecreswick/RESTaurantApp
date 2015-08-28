@@ -54,7 +54,7 @@ class PartiesController < ApplicationController
   put '/:id' do
     party = Party.find(params[:id])
     party.update(params[:party])
-    redirect "/parties/#{party.id}"
+    redirect "/parties"
   end
 
   # DESTROY

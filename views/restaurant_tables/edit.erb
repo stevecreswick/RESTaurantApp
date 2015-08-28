@@ -1,0 +1,13 @@
+<div class="container">
+
+<h3>Edit Table <%= @table.id %></h3>
+
+<form action="/restaurant_table/<%= @table.id %>" method="post">
+  <input type="hidden" name="_method" value="put">
+  <input type="text" name="restaurant_table[party_id]" value="<%= @table.party_id %>" placeholder="Current Party">
+  <input type="text" name="restaurant_table[table_location]" value="<%= @table.table_location %>">
+  <input type="text" name="restaurant_table[is_occupied]" value="<%= @table.is_occupied %>">
+  <input type="submit">
+</form>
+
+</div>
