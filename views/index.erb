@@ -4,23 +4,26 @@
 <br />
 
 <h3>Tables</h3>
-<% @tables.each do |table| %>
-<% if (table.is_occupied == false) %>
-<form action="/parties" method="post">
-  <input type="hidden" name="party[restaurant_table_id]" value ="<%= table.id %>">
-  <input type="hidden" name="party[bill]" value=0>
-  <input type="hidden" name="party[paid_bill]" value=false>
-  <input type="hidden" name="restaurant_table[is_occupied]" value=true>
-  <input type="hidden" name="table_id" value="<%= table.id %>">
-  <input type="submit" value="<%= table.id %>">
-  </form>
-<% elsif (table.is_occupied == true) %>
-<form action="/itemorders/new" method="get">
-  <input type="submit" value="<%= table.id %>" style="background: red">
-  </form>
-<%end%>
 
-<%end%>
+<% @tables.each do |table| %>
+
+<% if (table.is_occupied == false) %>
+
+  <form action="/parties" method="post" class="table-round center-align">
+    <input type="hidden" name="party[restaurant_table_id]" value ="<%= table.id %>">
+    <input type="hidden" name="party[bill]" value=0>
+    <input type="hidden" name="party[paid_bill]" value=false>
+    <input type="hidden" name="restaurant_table[is_occupied]" value=true>
+    <input type="hidden" name="table_id" value="<%= table.id %>">
+    <input type="submit" value="<%= table.id %>" class="table-input">
+    </form>
+
+  <% elsif (table.is_occupied == true) %>
+  <form action="/itemorders/new" method="get" class="table-square center-align occupied">
+    <input type="submit" value="<%= table.id %>" class="table-input" >
+    </form>
+  <%end%>
+<% end %>
 
 
 </div>

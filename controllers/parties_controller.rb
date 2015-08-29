@@ -35,7 +35,7 @@ class PartiesController < ApplicationController
     table.update({
       party_id: party.id
       })
-    redirect "/parties/#{ party.id }/edit"
+    redirect "/itemorders/new"
   end
 
   # SHOW
@@ -59,6 +59,10 @@ class PartiesController < ApplicationController
   put '/:id' do
     party = Party.find(params[:id])
     party.update(params[:party])
+    table = RestaurantTable.find(party.restaurant_table_id)
+    table.update({
+      is_occupied: false
+      })
     redirect "/parties"
   end
 

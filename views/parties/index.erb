@@ -26,6 +26,7 @@
               <form class="" action="/parties/<%= party.id %>" method="post">
                 <input type="hidden" name="_method" value="put">
                 <input type="hidden" name="party[id]" value="<%= party.id %>">
+                <input type="hidden" name="table_number" value="<%=party.restaurant_table_id%>">
                 <input type="hidden" name="party[paid_bill]" value="true">
                 <input type="submit" value="Pay Bill">
               </form>

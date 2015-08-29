@@ -7,10 +7,12 @@
     </div>
     <div class="row">
     <% @parties.each do |party| %>
-    <div class="col s2">
-      <input type="radio" name="party_id" value="<%= party.id %>" id ="<%= party.id %>"  />
-      <label for="<%= party.id %>"><%= party.restaurant_table_id %></label>
-    </div>
+    <% if (party.paid_bill == false) %>
+      <div class="col s2">
+        <input type="radio" name="party_id" value="<%= party.id %>" id ="<%= party.id %>"  />
+        <label for="<%= party.id %>"><%= party.restaurant_table_id %></label>
+      </div>
+      <%end%>
     <% end %>
     </div>
 

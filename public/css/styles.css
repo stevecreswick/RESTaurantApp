@@ -17,14 +17,48 @@ body {
  }
 
 .table-round {
-  background: black;
-  text-align: center;
-  color: white;
+  width: 25%;
+  margin-bottom: 3em;
+  margin-right: 20%;
+
+  display: inline-block;
+  /*background-image: url("../images/transparent_circle.png");*/
+  height: 3em;
+  width: 5%;
+  /*background-size: contain;*/
+  /*background-repeat: no-repeat;*/
+  border: 4px lightgrey solid;
+  border-radius: 100px;
+
+  float: left;
 }
 
 .table-square {
-  background: red;
-  height: 100%;
-  width: 50%;
-  text-align: center;
+  width: 25%;
+  margin-bottom: 3em;
+  margin-right: 20%;
+  display: inline-block;
+  /*background-image: url("../images/transparent_circle.png");*/
+  height: 3em;
+  width: 5%;
+  /*background-size: contain;*/
+  /*background-repeat: no-repeat;*/
+  border: 4px lightgrey solid;
+  border-radius: 5px;
+
+  float: left;
+}
+
+.occupied {
+  /*background-image: url("../images/transparent_circle.png");*/
+  /*background-size: contain;*/
+  /*background-repeat: no-repeat;*/
+  background-color: green;
+}
+
+.table-input {
+  margin-top: 25%;
+  background: rgba(0,0,0,-1);
+  border:none;
+  tex
 }
