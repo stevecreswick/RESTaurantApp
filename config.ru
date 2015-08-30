@@ -15,6 +15,7 @@ require './controllers/fooditems_controller'
 require './controllers/itemorders_controller'
 require './controllers/parties_controller'
 require './controllers/restaurant_tables_controller'
+require './controllers/admin_controller'
 
 
 # Routes
@@ -23,6 +24,7 @@ map('/fooditems'){ run FoodItemsController }
 map('/itemorders'){ run ItemOrdersController }
 map('/parties'){ run PartiesController }
 map('/restaurant_tables'){ run RestaurantTablesController }
+map('/admin'){ run AdminController }
 
 
 # CHEF Controller

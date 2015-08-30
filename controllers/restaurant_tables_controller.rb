@@ -28,7 +28,7 @@ class RestaurantTablesController < ApplicationController
   # CREATE
   post '/' do
     table = RestaurantTable.create(params[:restaurant_table])
-    redirect "/"
+    redirect "/admin"
   end
 
   # SHOW

@@ -37,7 +37,6 @@ class ItemOrdersController < ApplicationController
   special_requests =  params['special_requests']
   quantities =  params['quantities']
   storedquants = []
-  binding.pry
   if (quantities.length > 0)
     quantities.each do |quantity|
       if (quantity.length > 0)

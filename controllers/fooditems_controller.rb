@@ -5,6 +5,12 @@ class FoodItemsController < ApplicationController
   # INDEX
   get '/' do
     @fooditems = Fooditem.all
+    @drinks = Fooditem.where(course: "Drink").order("id ASC")
+    @apps = Fooditem.where(course: "Appetizer").order("id ASC")
+    @entrees = Fooditem.where(course: "Entree").order("id ASC")
+    @sides = Fooditem.where(course: "Sides").order("id ASC")
+    @desserts = Fooditem.where(course: "Dessert").order("id ASC")
+    @parties = Party.where(paid_bill: false).order("restaurant_table_id ASC")
     erb :'fooditems/index'
   end
 
@@ -35,13 +41,13 @@ class FoodItemsController < ApplicationController
   put '/:id' do
     fooditem = Fooditem.find(params[:id])
     fooditem.update(params[:fooditem])
-    redirect "/fooditems"
+    redirect "/admin"
   end
 
   # DESTROY
   delete '/:id' do
     Fooditem.delete(params[:id])
-    redirect '/fooditems'
+    redirect '/admin'
   end
 
 end

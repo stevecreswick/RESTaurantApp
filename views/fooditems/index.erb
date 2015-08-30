@@ -2,6 +2,256 @@
 <div class="container fooditems">
 
 <h3>Menu Items</h3>
+<div class="row">
+    <div class="col s12">
+      <ul class="tabs">
+        <li class="tab col s3"><a href="#drinks">Drinks</a></li>
+        <li class="tab col s3"><a href="#appetizers">Apps</a></li>
+        <li class="tab col s3"><a class="active" href="#entrees">Entrees</a></li>
+        <li class="tab col s3"><a href="#sides">Sides</a></li>
+        <li class="tab col s3"><a href="#desserts">Desserts</a></li>
+      </ul>
+    </div>
+  </div>
+
+<div id="entrees">
+<div class="row">
+<% @entrees.each do |fooditem| %>
+<% food_not_available = "" %>
+<% if (fooditem.available == false) %>
+  <% food_not_available = "disabled = 'disabled'" %>
+  <% unavailable = "style='border: red 4px solid'"%>
+<%end%>
+    <div class="col s12 m6 l4">
+      <div class="card-panel  deep-purple lighten-5" <%=unavailable%>>
+        <div class="card-content blue-text text-darken-2">
+          <div class="row">
+            <div class="col s9">
+          <input type="checkbox" name="fooditems[]" value="<%= fooditem.id %>" id="<%= fooditem.id %>" <%=food_not_available%>>
+          <label for="<%= fooditem.id %>" class="blue-text text-darken-2"><%= fooditem.name %></label>
+        </div>
+        <div class="col s3">
+          <%= ActiveSupport::NumberHelper.number_to_currency(fooditem.price)%>
+        </div>
+        </div>
+        <div class="row">
+          <div class="col s5">
+            <input type="integer" name="quantities[]" id="quantity" placeholder="Quantity" style="width: 100%" <%=food_not_available%>>
+          </div>
+          <div class="col s4 offset-s1 right-align">
+            <!-- Modal Triggers -->
+            <a class="waves-effect waves-light btn modal-trigger" href="#modal<%=fooditem.id%>">Info</a>
+          </div>
+        </div>
+
+          <!-- Modals -->
+          <div id="modal<%=fooditem.id%>" class="modal">
+            <div class="modal-content">
+              <h4><%=fooditem.name%></h4>
+              <h5><%= ActiveSupport::NumberHelper.number_to_currency(fooditem.price)%></h5>
+              <p><%=fooditem.description%></p>
+            </div>
+            <div class="modal-footer">
+              <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<% end %>
+</div>
+</div>
+
+<div id="appetizers">
+<div class="row">
+<% @apps.each do |fooditem| %>
+<% food_not_available = "" %>
+<% if (fooditem.available == false) %>
+<% food_not_available = "disabled = 'disabled'" %>
+<% unavailable = "style='border: red 4px solid'"%>
+<%end%>
+  <div class="col s12 m6 l4">
+    <div class="card-panel  deep-purple lighten-5" <%=unavailable%>>
+      <div class="card-content blue-text text-darken-2">
+      <div class="row">
+        <div class="col s9">
+        <input type="checkbox" name="fooditems[]" value="<%= fooditem.id %>" id="<%= fooditem.id %>" <%=food_not_available%>>
+        <label for="<%= fooditem.id %>"><%= fooditem.name %></label>
+      </div>
+        <div class="col s3">
+          <%= ActiveSupport::NumberHelper.number_to_currency(fooditem.price)%>
+        </div>
+        </div>
+        <div class="row">
+          <div class="col s5">
+            <input type="integer" name="quantities[]" id="quantity" placeholder="Quantity" style="width: 100%" <%=food_not_available%>>
+          </div>
+          <div class="col s4 offset-s1 right-align">
+            <!-- Modal Triggers -->
+            <a class="waves-effect waves-light btn modal-trigger" href="#modal<%=fooditem.id%>">Info</a>
+          </div>
+        </div>
+        <!-- Modals -->
+        <div id="modal<%=fooditem.id%>" class="modal">
+          <div class="modal-content">
+            <h4><%=fooditem.name%></h4>
+            <h5><%= ActiveSupport::NumberHelper.number_to_currency(fooditem.price)%></h5>
+            <p><%=fooditem.description%></p>
+          </div>
+          <div class="modal-footer">
+            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+</div>
+</div>
+
+<div id="drinks">
+<div class="row">
+<% @drinks.each do |fooditem| %>
+<% food_not_available = "" %>
+<% if (fooditem.available == false) %>
+<% food_not_available = "disabled = 'disabled'" %>
+<% unavailable = "style='border: red 4px solid'"%>
+<%end%>
+<div class="col  s12 m6 l4">
+  <div class="card-panel  deep-purple lighten-5" <%=unavailable%>>
+    <div class="card-content blue-text text-darken-2">
+      <div class="row">
+        <div class="col s9">
+      <input type="checkbox" name="fooditems[]" value="<%= fooditem.id %>" id="<%= fooditem.id %>" <%=food_not_available%>>
+      <label for="<%= fooditem.id %>"><%= fooditem.name %></label>
+    </div>
+    <div class="col s3"><%= ActiveSupport::NumberHelper.number_to_currency(fooditem.price)%>
+    </div>
+    </div>
+    <div class="row">
+      <div class="col s5">
+        <input type="integer" name="quantities[]" id="quantity" placeholder="Quantity" style="width: 100%" <%=food_not_available%>>
+      </div>
+      <div class="col s4 offset-s1 right-align">
+        <!-- Modal Triggers -->
+        <a class="waves-effect waves-light btn modal-trigger" href="#modal<%=fooditem.id%>">Info</a>
+      </div>
+    </div>
+      <!-- Modals -->
+      <div id="modal<%=fooditem.id%>" class="modal">
+        <div class="modal-content">
+          <h4><%=fooditem.name%></h4>
+          <h5><%= ActiveSupport::NumberHelper.number_to_currency(fooditem.price)%></h5>
+          <p><%=fooditem.description%></p>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+        </div>
+      </div>
+  </div>
+</div>
+</div>
+<% end %>
+</div>
+</div>
+
+<div id="sides">
+<div class="row">
+<% @sides.each do |fooditem| %>
+<% food_not_available = "" %>
+<% if (fooditem.available == false) %>
+<% food_not_available = "disabled = 'disabled'" %>
+<% unavailable = "style='border: red 4px solid'"%>
+<%end%>
+<div class="col s12 m6 l4">
+  <div class="card-panel  deep-purple lighten-5" <%=unavailable%>>
+    <div class="card-content blue-text text-darken-2">
+      <div class="row">
+        <div class="col s9">
+      <input type="checkbox" name="fooditems[]" value="<%= fooditem.id %>" id="<%= fooditem.id %>" <%=food_not_available%>>
+      <label for="<%= fooditem.id %>"><%= fooditem.name %></label>
+    </div>
+    <div class="col s3"><%= ActiveSupport::NumberHelper.number_to_currency(fooditem.price)%>
+    </div>
+    </div>
+    <div class="row">
+      <div class="col s5">
+        <input type="integer" name="quantities[]" id="quantity" placeholder="Quantity" style="width: 100%" <%=food_not_available%>>
+      </div>
+      <div class="col s4 offset-s1 right-align">
+        <!-- Modal Triggers -->
+        <a class="waves-effect waves-light btn modal-trigger" href="#modal<%=fooditem.id%>">Info</a>
+      </div>
+    </div>
+      <!-- Modals -->
+      <div id="modal<%=fooditem.id%>" class="modal">
+        <div class="modal-content">
+          <h4><%=fooditem.name%></h4>
+          <h5><%= ActiveSupport::NumberHelper.number_to_currency(fooditem.price)%></h5>
+          <p><%=fooditem.description%></p>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+</div>
+</div>
+
+
+<div id="desserts">
+<div class="row">
+<% @desserts.each do |fooditem| %>
+<% food_not_available = "" %>
+<% if (fooditem.available == false) %>
+<% food_not_available = "disabled = 'disabled'" %>
+<% unavailable = "style='border: red 4px solid'"%>
+<%end%>
+<div class="col s12 m6 l4">
+  <div class="card-panel  deep-purple lighten-5" <%=unavailable%>>
+    <div class="card-content blue-text text-darken-2">
+      <div class="row">
+        <div class="col s9">
+      <input type="checkbox" name="fooditems[]" value="<%= fooditem.id %>" id="<%= fooditem.id %>" <%=food_not_available%>>
+      <label for="<%= fooditem.id %>"><%= fooditem.name %></label>
+    </div>
+    <div class="col s3"><%= ActiveSupport::NumberHelper.number_to_currency(fooditem.price)%>
+    </div>
+    </div>
+    <div class="row">
+      <div class="col s5">
+        <input type="integer" name="quantities[]" id="quantity" placeholder="Quantity" style="width: 100%" <%=food_not_available%>>
+      </div>
+      <div class="col s4 offset-s1 right-align">
+        <!-- Modal Triggers -->
+        <a class="waves-effect waves-light btn modal-trigger" href="#modal<%=fooditem.id%>">Info</a>
+      </div>
+    </div>
+      <!-- Modals -->
+      <div id="modal<%=fooditem.id%>" class="modal">
+        <div class="modal-content">
+          <h4><%=fooditem.name%></h4>
+          <h5><%= ActiveSupport::NumberHelper.number_to_currency(fooditem.price)%></h5>
+          <p><%=fooditem.description%></p>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+</div>
+</div>
+
+
+
+</form>
+
 
 <a href="/fooditems/new">New Food Item</a>
 
@@ -19,7 +269,6 @@
 
           </tr>
         </thead>
-
         <tbody>
         <% @fooditems.each do |fooditem| %>
           <tr>

@@ -1,0 +1,442 @@
+<div class="container">
+<h5>Admin Panel</h5>
+<div class="divider">
+
+</div>
+<div class="section">
+
+<h5>Total Sales: <%= ActiveSupport::NumberHelper.number_to_currency(@totalsales) %></h5>
+</div>
+<ul class="collapsible popout" data-collapsible="accordion" style="text-align: center">
+  <li>
+    <div class="collapsible-header left-align red lighten-1" style="padding-top: 1px"><h5>Active Orders</h5></div>
+    <div class="collapsible-body">
+      <table class="bordered responsive-table">
+              <thead>
+                <tr>
+                    <th data-field="Table#">Order ID</th>
+                    <th data-field="Table#">Party ID</th>
+                    <th data-field="Table#">Food Item Number</th>
+                    <th data-field="Table#">Food Item</th>
+                    <th data-field="Table#">Quantity</th>
+                    <th data-field="Table#">Special Request</th>
+                    <th data-field="Table#">Time Elapsed</th>
+                    <th data-field="Table#">Order Up</th>
+                </tr>
+              </thead>
+
+              <tbody>
+              <% @activeorders.each do |itemorder| %>
+                <% time_elapsed = ((Time.now - itemorder.created_at)/60).round %>
+
+                <tr class="ordertime" data-time="<%=time_elapsed%>" data-active="<%=itemorder.is_active%>">
+                  <td><a href="/itemorders/<%= itemorder.id %>">
+      <%= itemorder.id %> </a></td>
+                  <td>
+                  <%= itemorder.party_id %></td>
+                  <td>
+                  <%= itemorder.fooditem_id %></td>
+                  <td>
+                    <%= itemorder.fooditem.name %>
+                  </td>
+                  <td>
+                    <%= itemorder.quantity%>
+                  </td>
+                  <td>
+                    <%= itemorder.special_request%>
+                  </td>
+                  <td>
+                    <%= ((Time.now - itemorder.created_at)/60).round %> min
+                  </td>
+                  <td>
+                    <form class="" action="/itemorders/<%= itemorder.id %>" method="post">
+                      <input type="hidden" name="_method" value="put">
+                      <input type="hidden" name="itemorder[id]" value="<%= itemorder.id %>">
+                      <input type="hidden" name="itemorder[is_active]" value="false">
+                      <input type="submit" value="Clear">
+                    </form>
+                  </td>
+                </tr>
+                <% end %>
+              </tbody>
+      </table>
+      <div class="divider">
+      </div>
+      <br><br>
+<div class="row">
+  <div class="col s6 offset-s5 right-align">
+    <form action="/itemorders" method="get">
+      <input type="submit" value="All Orders">
+    </form>
+  </div>
+</div>
+</div>
+</li>
+</ul>
+
+<div class="divider">
+
+</div>
+
+<ul class="collapsible popout" data-collapsible="accordion" style="text-align: center">
+  <li>
+    <div class="collapsible-header left-align red lighten-1" style="padding-top: 1px"><h5>Manage Menu</h5></div>
+    <div class="collapsible-body">
+      <div class="section">
+        <div class="row">
+          <div class="col s12">
+            <form action="/fooditems/new" method="get">
+              <input type="submit" value="Create New Menu Item">
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+          <div class="col s12">
+            <ul class="tabs">
+              <li class="tab col s3"><a href="#drinks">Drinks</a></li>
+              <li class="tab col s3"><a href="#appetizers">Apps</a></li>
+              <li class="tab col s3"><a class="active" href="#entrees">Entrees</a></li>
+              <li class="tab col s3"><a href="#sides">Sides</a></li>
+              <li class="tab col s3"><a href="#desserts">Desserts</a></li>
+            </ul>
+          </div>
+        </div>
+
+
+
+      <div id="appetizers">
+      <div class="row">
+              <% @fooditems.each do |fooditem| %>
+              <% if (fooditem.available == false)%>
+              <% unavailable = "style='border: red 4px solid'"%>
+              <%end%>
+              <% if (fooditem.course == "Appetizer") %>
+              <div class="col s12 m6 l4">
+                <div class="card-panel  deep-purple lighten-5 hoverable"  <%=unavailable%>>
+                  <div class="card-content blue-text text-darken-2">
+                    <div class="row">
+                      <div class="col s9">
+                        <%= fooditem.name %>
+                      </div>
+                      <div class="col s3">
+                        <%= ActiveSupport::NumberHelper.number_to_currency(fooditem.price)%>
+                      </div>
+                    </div>
+                  <div class="row">
+                    <div class="col s3">
+                      <form action="/fooditems/<%= fooditem.id %>" method="post">
+                        <input type="hidden" name="_method" value="put">
+                        <input type="hidden" name="fooditem[available]" value="false">
+                        <input type="submit" value="86">
+                      </form>
+                    </div>
+                    <div class="col s5">
+                      <form action="/fooditems/<%= fooditem.id %>" method="post">
+                        <input type="hidden" name="_method" value="put">
+                        <input type="hidden" name="fooditem[available]" value="true">
+                        <input type="submit" value="In-Stock">
+                      </form>
+                    </div>
+                  <div class="col s3">
+                    <form action="/fooditems/<%= fooditem.id %>/edit" method="get">
+                      <input type="submit" value="Edit">
+                    </form>
+                  </div>
+                </div>
+                </div>
+              </div>
+            </div>
+
+                <% end %>
+              <%end%>
+
+      </div>
+      </div>
+
+      <div id="entrees">
+      <div class="row">
+            <% @fooditems.each do |fooditem| %>
+            <% if (fooditem.available == false)%>
+            <% unavailable = "style='border: red 4px solid'"%>
+            <%end%>
+            <% if (fooditem.course == "Entree") %>
+            <div class="col s12 m6 l4">
+              <div class="card-panel  deep-purple lighten-5 hoverable"  <%=unavailable%>>
+                <div class="card-content blue-text text-darken-2">
+                  <div class="row">
+                    <div class="col s9">
+                      <%= fooditem.name %>
+                    </div>
+                    <div class="col s3">
+                      <%= ActiveSupport::NumberHelper.number_to_currency(fooditem.price)%>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col s3">
+                      <form action="/fooditems/<%= fooditem.id %>" method="post">
+                        <input type="hidden" name="_method" value="put">
+                        <input type="hidden" name="fooditem[available]" value="false">
+                        <input type="submit" value="86">
+                      </form>
+                    </div>
+                    <div class="col s5">
+                      <form action="/fooditems/<%= fooditem.id %>" method="post">
+                        <input type="hidden" name="_method" value="put">
+                        <input type="hidden" name="fooditem[available]" value="true">
+                        <input type="submit" value="In-Stock">
+                      </form>
+                    </div>
+                  <div class="col s3">
+                    <form action="/fooditems/<%= fooditem.id %>/edit" method="get">
+                      <input type="submit" value="Edit">
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+              <% end %>
+            <%end%>
+
+      </div>
+      </div>
+
+      <div id="sides">
+      <div class="row">
+            <% @fooditems.each do |fooditem| %>
+            <% if (fooditem.available == false)%>
+            <% unavailable = "style='border: red 4px solid'"%>
+            <%end%>
+            <% if (fooditem.course == "Sides") %>
+            <div class="col s12 m6 l4">
+              <div class="card-panel  deep-purple lighten-5 hoverable"  <%=unavailable%>>
+                <div class="card-content blue-text text-darken-2">
+                  <div class="row">
+                    <div class="col s9">
+                      <%= fooditem.name %>
+                    </div>
+                    <div class="col s3">
+                      <%= ActiveSupport::NumberHelper.number_to_currency(fooditem.price)%>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col s3">
+                      <form action="/fooditems/<%= fooditem.id %>" method="post">
+                        <input type="hidden" name="_method" value="put">
+                        <input type="hidden" name="fooditem[available]" value="false">
+                        <input type="submit" value="86">
+                      </form>
+                    </div>
+                    <div class="col s5">
+                      <form action="/fooditems/<%= fooditem.id %>" method="post">
+                        <input type="hidden" name="_method" value="put">
+                        <input type="hidden" name="fooditem[available]" value="true">
+                        <input type="submit" value="In-Stock">
+                      </form>
+                    </div>
+                  <div class="col s3">
+                    <form action="/fooditems/<%= fooditem.id %>/edit" method="get">
+                      <input type="submit" value="Edit">
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+              <% end %>
+            <%end%>
+
+      </div>
+      </div>
+
+      <div id="drinks">
+      <div class="row">
+            <% @fooditems.each do |fooditem| %>
+            <% if (fooditem.available == false)%>
+            <% unavailable = "style='border: red 4px solid'"%>
+            <%end%>
+            <% if (fooditem.course == "Drink") %>
+            <div class="col s12 m6 l4">
+              <div class="card-panel  deep-purple lighten-5 hoverable"  <%=unavailable%>>
+                <div class="card-content blue-text text-darken-2">
+                  <div class="row">
+                    <div class="col s9">
+                      <%= fooditem.name %>
+                    </div>
+                    <div class="col s3">
+                      <%= ActiveSupport::NumberHelper.number_to_currency(fooditem.price)%>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col s3">
+                      <form action="/fooditems/<%= fooditem.id %>" method="post">
+                        <input type="hidden" name="_method" value="put">
+                        <input type="hidden" name="fooditem[available]" value="false">
+                        <input type="submit" value="86">
+                      </form>
+                    </div>
+                    <div class="col s5">
+                      <form action="/fooditems/<%= fooditem.id %>" method="post">
+                        <input type="hidden" name="_method" value="put">
+                        <input type="hidden" name="fooditem[available]" value="true">
+                        <input type="submit" value="In-Stock">
+                      </form>
+                    </div>
+                  <div class="col s3">
+                    <form action="/fooditems/<%= fooditem.id %>/edit" method="get">
+                      <input type="submit" value="Edit">
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+              <% end %>
+            <%end%>
+
+      </div>
+      </div>
+
+      <div id="desserts">
+      <div class="row">
+            <% @fooditems.each do |fooditem| %>
+            <% if (fooditem.available == false)%>
+            <% unavailable = "style='border: red 4px solid'"%>
+            <%end%>
+            <% if (fooditem.course == "Dessert") %>
+            <div class="col s12 m6 l4">
+              <div class="card-panel  deep-purple lighten-5 hoverable"  <%=unavailable%>>
+                <div class="card-content blue-text text-darken-2">
+                  <div class="row">
+                    <div class="col s9">
+                      <%= fooditem.name %>
+                    </div>
+                    <div class="col s3">
+                      <%= ActiveSupport::NumberHelper.number_to_currency(fooditem.price)%>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col s3">
+                      <form action="/fooditems/<%= fooditem.id %>" method="post">
+                        <input type="hidden" name="_method" value="put">
+                        <input type="hidden" name="fooditem[available]" value="false">
+                        <input type="submit" value="86">
+                      </form>
+                    </div>
+                    <div class="col s5">
+                      <form action="/fooditems/<%= fooditem.id %>" method="post">
+                        <input type="hidden" name="_method" value="put">
+                        <input type="hidden" name="fooditem[available]" value="true">
+                        <input type="submit" value="In-Stock">
+                      </form>
+                    </div>
+                  <div class="col s3">
+                    <form action="/fooditems/<%= fooditem.id %>/edit" method="get">
+                      <input type="submit" value="Edit">
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+              <% end %>
+            <%end%>
+
+      </div>
+      </div>
+
+    </div>
+  </li>
+</ul>
+
+
+
+<div class="divider"></div>
+
+
+<div class="section">
+  <ul class="collapsible popout" data-collapsible="accordion" style="text-align: center">
+      <li>
+        <div class="collapsible-header left-align red lighten-1" style="padding-top: 1px"><h5>Manage Tables</h5></div>
+        <div class="collapsible-body">
+          <br>
+  <div class="row">
+    <div class="col s12">
+      <form action="/restaurant_tables/new" method="get">
+        <input type="submit" value="Create New Table">
+      </form>
+    </div>
+  </div>
+
+  <ul class="collapsible" data-collapsible="accordion">
+      <li>
+        <div class="collapsible-header">Active Tables</div>
+        <div class="collapsible-body"><table class="bordered hoverable responsive-table">
+                <thead>
+                  <tr>
+                      <th data-field="Table#">Table Number</th>
+                      <th data-field="Table#">Current Check Number</th>
+                      <th data-field="Table#">Table Location</th>
+                      <th data-field="Table#">Shape</th>
+                      <th data-field="Table#">Seated</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                <% @seatedtables.each do |table| %>
+                  <tr>
+                    <td><a href="/restaurant_tables/<%= table.id %>">
+        <%= table.id %> </a></td>
+                    <td>
+                    <%= table.party_id %></td>
+                    <td><%= table.table_location %></td>
+                    <td><%= table.shape %></td>
+                    <td><%= table.is_occupied %></td>
+                  </tr>
+                  <% end %>
+                </tbody>
+        </table>
+      </div>
+      </li>
+      <li>
+        <div class="collapsible-header">Open Tables</div>
+        <div class="collapsible-body">  <table class="bordered hoverable responsive-table">
+                  <thead>
+                    <tr>
+                      <th data-field="Table#">Table Number</th>
+                      <th data-field="Table#">Current Check Number</th>
+                      <th data-field="Table#">Table Location</th>
+                      <th data-field="Table#">Shape</th>
+                      <th data-field="Table#">Seated</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                  <% @emptytables.each do |table| %>
+                    <tr>
+                      <td>
+          <%= table.id %></td>
+                      <td>
+                      <%= table.party_id %></td>
+                      <td><%= table.table_location %></td>
+                      <td><%= table.shape %></td>
+                      <td><%= table.is_occupied  %></td>
+                    <% end %>
+                  </tbody>
+          </table>
+  </div>
+      </li>
+    </ul>
+
+
+</div>
+</li>
+</ul>
+  </div>
+
+</div>
