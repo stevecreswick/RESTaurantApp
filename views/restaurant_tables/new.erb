@@ -7,6 +7,11 @@
 <form action="/restaurant_tables" method="post">
   <input type="text" name="restaurant_table[table_location]" placeholder="Table Location">
   <input type="hidden" name="restaurant_table[is_occupied]" value=false>
+  <input type="radio" name="restaurant_table[shape]" value="table-round" id ="round"  />
+    <label for="round">Round Table</label>
+    <input type="radio" name="restaurant_table[shape]" value="table-square" id ="square"  />
+      <label for="square">Square Table</label>
+      <input type="submit" value="Make new table">
 </form>
 
 </div>

@@ -20,7 +20,8 @@ class ItemOrdersController < ApplicationController
   # NEW
   get '/new' do
     @fooditems = Fooditem.all
-    @parties = Party.all
+    @parties = Party.where(paid_bill: false).order("restaurant_table_id ASC")
+    @sortedparties = @parties
     erb :'itemorders/new'
   end
 

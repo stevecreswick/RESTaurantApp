@@ -7,6 +7,7 @@
               <th data-field="Table#">Table Number</th>
               <th data-field="Table#">Current Check Number</th>
               <th data-field="Table#">Table Location</th>
+              <th data-field="Table#">Shape</th>
               <th data-field="Table#">Seated</th>
           </tr>
         </thead>
@@ -19,6 +20,7 @@
             <td>
             <%= table.party_id %></td>
             <td><%= table.table_location %></td>
+            <td><%= table.shape %></td>
             <td><%= table.is_occupied %></td>
           </tr>
           <% end %>
@@ -33,6 +35,7 @@
             <th data-field="Table#">Table Number</th>
             <th data-field="Table#">Current Check Number</th>
             <th data-field="Table#">Table Location</th>
+            <th data-field="Table#">Shape</th>
             <th data-field="Table#">Seated</th>
           </tr>
         </thead>
@@ -45,6 +48,7 @@
             <td>
             <%= table.party_id %></td>
             <td><%= table.table_location %></td>
+            <td><%= table.shape %></td>
             <td><%= table.is_occupied  %></td>
           <% end %>
         </tbody>

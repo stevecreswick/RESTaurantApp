@@ -5,16 +5,12 @@
     <div class="row">
       <h5 class="center-align">Select a Table</h5>
     </div>
-    <div class="row">
     <% @parties.each do |party| %>
     <% if (party.paid_bill == false) %>
-      <div class="col s2">
-        <input type="radio" name="party_id" value="<%= party.id %>" id ="<%= party.id %>"  />
-        <label for="<%= party.id %>"><%= party.restaurant_table_id %></label>
-      </div>
+        <input type="radio" name="party_id" value="<%= party.id %>" id ="<%= party.id %>"/>
+        <label for="<%= party.id %>"  class="table-radio">Table <%= party.restaurant_table_id %><br><%=ActiveSupport::NumberHelper.number_to_currency(party.bill)%></label>
       <%end%>
     <% end %>
-    </div>
 
     <div class="row">
       <h5 class="center-align">Select Food Items</h5>

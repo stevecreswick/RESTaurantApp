@@ -19,24 +19,25 @@ body {
 .table-round {
   width: 25%;
   margin-bottom: 3em;
-  margin-right: 20%;
-
+  margin-right: 15%;
+  margin-top: 2em;
   display: inline-block;
   /*background-image: url("../images/transparent_circle.png");*/
   height: 3em;
-  width: 5%;
+  width: 6%;
   /*background-size: contain;*/
   /*background-repeat: no-repeat;*/
   border: 4px lightgrey solid;
   border-radius: 100px;
 
-  float: left;
 }
 
 .table-square {
   width: 25%;
   margin-bottom: 3em;
-  margin-right: 20%;
+  margin-right: 15%;
+  margin-top: 2em;
+
   display: inline-block;
   /*background-image: url("../images/transparent_circle.png");*/
   height: 3em;
@@ -46,7 +47,6 @@ body {
   border: 4px lightgrey solid;
   border-radius: 5px;
 
-  float: left;
 }
 
 .occupied {
@@ -60,5 +60,28 @@ body {
   margin-top: 25%;
   background: rgba(0,0,0,-1);
   border:none;
-  tex
+}
+
+.table-radio {
+  margin-right: 15%;
+  margin-bottom: 4em;
+}
+
+#main_dining_room {
+  text-align: center;
+  padding-left: 10%;
+}
+
+#bar {
+  text-align: center;
+  padding-left: 10%;
+}
+
+#outside {
+  text-align: center;
+  padding-left: 10%;
+}
+
+#outside.table-round {
+  margin-left: 15%;
 }

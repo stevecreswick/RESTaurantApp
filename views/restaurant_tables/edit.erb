@@ -7,6 +7,10 @@
   <input type="text" name="restaurant_table[party_id]" value="<%= @table.party_id %>" placeholder="Current Party">
   <input type="text" name="restaurant_table[table_location]" value="<%= @table.table_location %>">
   <input type="text" name="restaurant_table[is_occupied]" value="<%= @table.is_occupied %>">
+  <input type="radio" name="restaurant_table[shape]" value="table-round" id ="round"  />
+    <label for="round">Round Table</label>
+    <input type="radio" name="restaurant_table[shape]" value="table-square" id ="square"  />
+      <label for="square">Square Table</label>
   <input type="submit">
 </form>
 
