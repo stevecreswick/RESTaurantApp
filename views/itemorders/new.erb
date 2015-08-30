@@ -1,31 +1,121 @@
 <div class="container">
+  <br><br>
 
   <form action="/itemorders" method="post">
-    <br><br>
-    <div class="row">
-      <h5 class="center-align">Select a Table</h5>
-    </div>
+
     <% @parties.each do |party| %>
     <% if (party.paid_bill == false) %>
-        <input type="radio" name="party_id" value="<%= party.id %>" id ="<%= party.id %>"/>
+        <div class="table-card">
+          <input type="radio" name="party_id" value="<%= party.id %>" id ="<%= party.id %>"/>
         <label for="<%= party.id %>"  class="table-radio">Table <%= party.restaurant_table_id %><br><%=ActiveSupport::NumberHelper.number_to_currency(party.bill)%></label>
+        </div>
       <%end%>
     <% end %>
-
     <div class="row">
-      <h5 class="center-align">Select Food Items</h5>
+      <div class="col s12 right-align">
+      <input type="submit" value="Submit Order">
+      </div>
     </div>
-
-      <% @fooditems.each do |fooditem| %>
-      <div class="row">
-        <div class="col s6">
-          <input type="checkbox" name="fooditems[]" value="<%= fooditem.id %>" id="<%= fooditem.id %>">
-        <label for="<%= fooditem.id %>"><%= fooditem.name %></label>
+    <div class="row">
+        <div class="col s12">
+          <ul class="tabs">
+            <li class="tab col s3"><a href="#drinks">Drinks</a></li>
+            <li class="tab col s3"><a href="#appetizers">Apps</a></li>
+            <li class="tab col s3"><a class="active" href="#entrees">Entrees</a></li>
+            <li class="tab col s3"><a href="#sides">Sides</a></li>
+            <li class="tab col s3"><a href="#desserts">Desserts</a></li>
+          </ul>
         </div>
-    </div>
-    <% end %>
+      </div>
 
-      <input type="submit" value="Order">
+<div id="entrees">
+  <div class="row">
+    <% @entrees.each do |fooditem| %>
+        <div class="col s4">
+          <div class="card-panel  deep-purple lighten-5">
+            <div class="card-content blue-text text-darken-2">
+              <input type="checkbox" name="fooditems[]" value="<%= fooditem.id %>" id="<%= fooditem.id %>">
+              <label for="<%= fooditem.id %>" class="blue-text text-darken-2"><%= fooditem.name %></label><br>
+              <input type="integer" name="quantities[]" id="quantity" placeholder="Quantity">
+              <input type="text" name="special_requests[]" id="special_request" placeholder="Special Request">
+            </div>
+          </div>
+        </div>
+    <% end %>
+  </div>
+</div>
+
+<div id="appetizers">
+  <div class="row">
+  <% @apps.each do |fooditem| %>
+      <div class="col s4">
+        <div class="card-panel  deep-purple lighten-5">
+          <div class="card-content">
+            <input type="checkbox" name="fooditems[]" value="<%= fooditem.id %>" id="<%= fooditem.id %>">
+            <label for="<%= fooditem.id %>"><%= fooditem.name %></label><br>
+            <input type="integer" name="quantities[]" id="quantity" placeholder="Quantity" class="validate">
+            <input type="text" name="special_requests[]" id="special_request" placeholder="Special Request">
+          </div>
+        </div>
+      </div>
+
+  <% end %>
+</div>
+</div>
+
+<div id="drinks">
+  <div class="row">
+<% @drinks.each do |fooditem| %>
+    <div class="col s4">
+      <div class="card-panel  deep-purple lighten-5">
+        <div class="card-content">
+          <input type="checkbox" name="fooditems[]" value="<%= fooditem.id %>" id="<%= fooditem.id %>">
+          <label for="<%= fooditem.id %>"><%= fooditem.name %></label><br>
+          <input type="integer" name="quantities[]" id="quantity" placeholder="Quantity">
+          <input type="text" name="special_requests[]" id="special_request" placeholder="Special Request">
+        </div>
+      </div>
+    </div>
+<% end %>
+</div>
+</div>
+
+<div id="sides">
+  <div class="row">
+<% @sides.each do |fooditem| %>
+    <div class="col s4">
+      <div class="card-panel  deep-purple lighten-5">
+        <div class="card-content">
+          <input type="checkbox" name="fooditems[]" value="<%= fooditem.id %>" id="<%= fooditem.id %>">
+          <label for="<%= fooditem.id %>"><%= fooditem.name %></label><br>
+          <input type="integer" name="quantities[]" id="quantity" placeholder="Quantity">
+          <input type="text" name="special_requests[]" id="special_request" placeholder="Special Request">
+        </div>
+      </div>
+    </div>
+<% end %>
+</div>
+</div>
+
+
+<div id="desserts">
+  <div class="row">
+<% @desserts.each do |fooditem| %>
+    <div class="col s4">
+      <div class="card-panel  deep-purple lighten-5">
+        <div class="card-content">
+          <input type="checkbox" name="fooditems[]" value="<%= fooditem.id %>" id="<%= fooditem.id %>">
+          <label for="<%= fooditem.id %>"><%= fooditem.name %></label><br>
+          <input type="integer" name="quantities[]" id="quantity" placeholder="Quantity">
+          <input type="text" name="special_requests[]" id="special_request" placeholder="Special Request">
+        </div>
+      </div>
+    </div>
+<% end %>
+</div>
+</div>
+
+
 
     </form>
 

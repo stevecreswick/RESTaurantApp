@@ -33,7 +33,6 @@ class FoodItemsController < ApplicationController
 
   # UPDATE
   put '/:id' do
-    binding.pry
     fooditem = Fooditem.find(params[:id])
     fooditem.update(params[:fooditem])
     redirect "/fooditems"

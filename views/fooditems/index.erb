@@ -13,6 +13,7 @@
               <th data-field="spice_level">Spiciness</th>
               <th data-field="price">Price</th>
               <th data-field="description">Description</th>
+              <th data-field="course">Course</th>
               <th data-field="description">86</th>
               <th data-field="description">Make Available</th>
 
@@ -28,13 +29,14 @@
             <td><%= fooditem.spice_level %></td>
             <td><%= ActiveSupport::NumberHelper.number_to_currency(fooditem.price) %></td>
             <td><%= fooditem.description %></td>
+            <td><%= fooditem.course %></td>
+
             <td>
               <form class="" action="/fooditems/<%= fooditem.id %>" method="post">
                 <input type="hidden" name="_method" value="put">
                 <input type="hidden" name="fooditem[available]" value="false">
                 <input type="submit" value="86">
               </form>
-              <%= fooditem.available %>
 
             </td>
             <td>
@@ -43,7 +45,6 @@
                 <input type="hidden" name="fooditem[available]" value="true">
                 <input type="submit" value="Available">
               </form>
-              <%= fooditem.available %>
             </td>
 
           </tr>

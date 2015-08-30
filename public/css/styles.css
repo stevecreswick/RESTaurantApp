@@ -63,7 +63,7 @@ body {
 }
 
 .table-radio {
-  margin-right: 15%;
+  margin-right: 10%;
   margin-bottom: 4em;
 }
 
@@ -87,4 +87,31 @@ body {
 }
 
 .time {
+}
+
+.table-card {
+  width: 15%;
+  height: 4em;
+  margin-bottom: 2em;
+  margin-left: 3%;
+  display: inline-block;
+  border-radius: 10px;
+  border: solid grey 3px;
+}
+
+.card-panel{
+  color: white;
+  width: 95%;
+}
+
+.food-card {
+  width: 25%;
+  height: 10em;
+  margin-bottom: 2em;
+  margin-left: 1%;
+  display: inline-block;
+  border-radius: 10px;
+  border: solid grey 3px;
+  padding-left: 4%;
+  padding-right: 4%;
 }
