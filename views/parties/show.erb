@@ -18,15 +18,17 @@
         <thead>
           <tr>
               <th data-field="Table#">Items Ordered</th>
+              <td>Quantity</td>
               <th data-field="Table#" class="right-align">Price</th>
           </tr>
         </thead>
 
         <tbody>
-          <% @party.fooditems.each do |fooditem| %>
+          <% @party.itemorders.each do |itemorder| %>
           <tr>
-          <td><%= fooditem.name %></td>
-          <td class="right-align"><%= ActiveSupport::NumberHelper.number_to_currency(fooditem.price )%></td>
+          <td><%= itemorder.fooditem.name %></td>
+          <td><%= itemorder.quantity %></td>
+          <td class="right-align"><%= ActiveSupport::NumberHelper.number_to_currency((itemorder.fooditem.price * itemorder.quantity.to_i) )%></td>
           <% end %>
           </tr>
 

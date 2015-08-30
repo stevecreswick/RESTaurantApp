@@ -37,10 +37,15 @@ class ItemOrdersController < ApplicationController
   special_requests =  params['special_requests']
   quantities =  params['quantities']
   storedquants = []
-  quantities.each do |quantity|
-    if (quantity.length > 0)
-      storedquants.push(quantity)
+  binding.pry
+  if (quantities.length > 0)
+    quantities.each do |quantity|
+      if (quantity.length > 0)
+        storedquants.push(quantity)
+      end
     end
+  else
+    storedquants.push(quantities)
   end
   binding.pry
 
@@ -50,7 +55,7 @@ class ItemOrdersController < ApplicationController
         fooditem_id: fooditem,
         party_id: party_id,
         is_active: true,
-        # special_request: special_requests[i],
+        special_request: special_requests,
         quantity: storedquants[i]
         })
 
