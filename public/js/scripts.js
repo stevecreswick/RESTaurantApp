@@ -14,6 +14,7 @@ $( document ).ready(function() {
   //check if Bill is paid
   checkBillPaid();
   colorBillGreen();
+
 });
 
 

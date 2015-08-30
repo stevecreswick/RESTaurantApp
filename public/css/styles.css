@@ -18,7 +18,7 @@ body {
 
 .table-round {
   width: 25%;
-  margin-bottom: 3em;
+  margin-bottom: 2em;
   margin-right: 15%;
   margin-top: 2em;
   display: inline-block;
@@ -34,7 +34,7 @@ body {
 
 .table-square {
   width: 25%;
-  margin-bottom: 3em;
+  margin-bottom: 2em;
   margin-right: 15%;
   margin-top: 2em;
 
@@ -84,4 +84,7 @@ body {
 
 #outside.table-round {
   margin-left: 15%;
+}
+
+.time {
 }

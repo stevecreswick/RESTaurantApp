@@ -29,15 +29,19 @@
         <div class="input-field col s4">
           <label for="fooditem[spice_level]">Spice</label>
           <p class="range-field">
-            <input type="range" name="fooditem[spice_level]" min="0" max="5" value="<%= @fooditem.spice_level %>" />
+            <input type="range" name="fooditem[spice_level]" min="0" max="5" value="<%= @fooditem.spice_level %>" >
 
           </p>
         </div>
       </div>
       <div class="row">
-        <div class="input-field col s12">
+        <div class="input-field col s8">
           <input name="fooditem[description]" value="<%= @fooditem.description %>">
           <label for="description">Description</label>
+        </div>
+        <div class="input-field col s4">
+          <input name="fooditem[available]" value="<%= @fooditem.available %>">
+          <label for="description">Available</label>
         </div>
       </div>
       <div class="row">
