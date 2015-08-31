@@ -17,14 +17,13 @@ body {
  }
 
 .table-round {
-  width: 25%;
+  width: 33%;
   margin-bottom: 2em;
   margin-right: 15%;
   margin-top: 2em;
   display: inline-block;
   /*background-image: url("../images/transparent_circle.png");*/
   height: 3em;
-  width: 6%;
   /*background-size: contain;*/
   /*background-repeat: no-repeat;*/
   border: 4px lightgrey solid;
@@ -33,7 +32,7 @@ body {
 }
 
 .table-square {
-  width: 25%;
+  width: 50%;
   margin-bottom: 2em;
   margin-right: 15%;
   margin-top: 2em;
@@ -41,7 +40,6 @@ body {
   display: inline-block;
   /*background-image: url("../images/transparent_circle.png");*/
   height: 3em;
-  width: 5%;
   /*background-size: contain;*/
   /*background-repeat: no-repeat;*/
   border: 4px lightgrey solid;

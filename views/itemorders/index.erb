@@ -1,14 +1,13 @@
 <div class="container">
 
 <div class="row">
-  <h5>Active Orders</h5>
+  <h5 class="teal-text text-lighten-1">Active Orders</h5>
 </div>
-<table class="bordered responsive-table">
+<table class="bordered s8">
         <thead>
           <tr>
               <th data-field="Table#">Order ID</th>
               <th data-field="Table#">Party ID</th>
-              <th data-field="Table#">Food Item Number</th>
               <th data-field="Table#">Food Item</th>
               <th data-field="Table#">Quantity</th>
               <th data-field="Table#">Special Request</th>
@@ -26,8 +25,6 @@
 <%= itemorder.id %> </a></td>
             <td>
             <%= itemorder.party_id %></td>
-            <td>
-            <%= itemorder.fooditem_id %></td>
             <td>
               <%= itemorder.fooditem.name %>
             </td>
@@ -54,9 +51,9 @@
 </table>
 
 <div class="row">
-  <h5>Inactive Orders</h5>
+  <h5 class="teal-text text-lighten-1">Inactive Orders</h5>
 </div>
-<table class="bordered responsive-table">
+<table class="bordered s10">
         <thead>
           <tr>
               <th data-field="Table#">Order ID</th>
