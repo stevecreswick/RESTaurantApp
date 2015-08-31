@@ -2,7 +2,11 @@ body {
    display: flex;
    min-height: 100vh;
    flex-direction: column;
- }
+   font-family: 'Metrophobic', sans-serif;
+
+}
+
+
 
  .container {
  }
@@ -26,13 +30,14 @@ body {
   height: 3em;
   /*background-size: contain;*/
   /*background-repeat: no-repeat;*/
-  border: 4px lightgrey solid;
+  border: 4px solid;
+  border-color: rgb(112,128,144);
   border-radius: 100px;
 
 }
 
 .table-square {
-  width: 50%;
+  width: 33%;
   margin-bottom: 2em;
   margin-right: 15%;
   margin-top: 2em;
@@ -42,7 +47,8 @@ body {
   height: 3em;
   /*background-size: contain;*/
   /*background-repeat: no-repeat;*/
-  border: 4px lightgrey solid;
+  border: 4px solid;
+  border-color: rgb(112,128,144);
   border-radius: 5px;
 
 }
@@ -51,11 +57,11 @@ body {
   /*background-image: url("../images/transparent_circle.png");*/
   /*background-size: contain;*/
   /*background-repeat: no-repeat;*/
-  background-color: green;
+  background-color: rgb(152,251,152);
 }
 
 .table-input {
-  margin-top: 25%;
+  margin-top: 0.5em;
   background: rgba(0,0,0,-1);
   border:none;
 }
@@ -100,6 +106,7 @@ body {
 .card-panel{
   color: white;
   width: 95%;
+  padding: 1%;
 }
 
 .food-card {
@@ -112,4 +119,17 @@ body {
   border: solid grey 3px;
   padding-left: 4%;
   padding-right: 4%;
+}
+
+.btn {
+  font-family: 'Exo', sans-serif;
+}
+
+.teal-text{
+font-family: 'Metrophobic', sans-serif;
+}
+
+.page-title {
+  font-family: 'Offside', cursive;
+  margin-top: 0.75em;
 }

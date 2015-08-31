@@ -3,63 +3,70 @@
 <div class="row">
   <h5 class="teal-text text-lighten-1">Active Orders</h5>
 </div>
-<table class="bordered s8">
-        <thead>
-          <tr>
-              <th data-field="Table#">Order ID</th>
-              <th data-field="Table#">Party ID</th>
-              <th data-field="Table#">Food Item</th>
-              <th data-field="Table#">Quantity</th>
-              <th data-field="Table#">Special Request</th>
-              <th data-field="Table#">Time Elapsed</th>
-              <th data-field="Table#">Order Up</th>
-          </tr>
-        </thead>
 
-        <tbody>
-        <% @activeorders.each do |itemorder| %>
-          <% time_elapsed = ((Time.now - itemorder.created_at)/60).round %>
 
-          <tr class="ordertime" data-time="<%=time_elapsed%>" data-active="<%=itemorder.is_active%>">
-            <td><a href="/itemorders/<%= itemorder.id %>">
-<%= itemorder.id %> </a></td>
-            <td>
-            <%= itemorder.party_id %></td>
-            <td>
-              <%= itemorder.fooditem.name %>
-            </td>
-            <td>
-              <%= itemorder.quantity%>
-            </td>
-            <td>
-              <%= itemorder.special_request%>
-            </td>
-            <td>
-              <%= ((Time.now - itemorder.created_at)/60).round %> min
-            </td>
-            <td>
-              <form class="" action="/itemorders/<%= itemorder.id %>" method="post">
+<div class="row">
+<% @activeorders.each do |itemorder| %>
+<% time_elapsed = ((Time.now - itemorder.created_at)/60).round %>
+<% background_color ="blue-grey darken-4" %>
+<% if (time_elapsed > 17 ) %>
+<% background_color = "red darken-3" %>
+<% elsif (time_elapsed >= 10) %>
+<% background_color = "orange darken-3"%>
+<% elsif (time_elapsed >= 5) %>
+<% background_color = "orange lighten-3"%>
+<% end %>
+    <div class="col s12 m6 l4">
+      <div class="card-panel <%=background_color%>" data-time="<%=time_elapsed%>" data-active="<%=itemorder.is_active%>">
+        <div class="card-content grey-text text-lighten-3">
+          <div class="row ordertime">
+          <div class="col s4">
+          <strong>Check # <%= itemorder.party_id %></strong>        </div>
+          <div class="col s8 right-align">
+            <p><%= ((Time.now - itemorder.created_at)/60).round %> min</p>
+          </div>
+            <div class="col s8">
+              <h5><%= itemorder.fooditem.name %></h5>
+            </div>
+            <div class="col s4">
+              <h5>x  <%= itemorder.quantity%></5>
+            </div>
+            <div class="col s12 ">
+              <p>Request: <%= itemorder.special_request%></p>
+            </div>
+            <div class="col s12 right-align">
+              <br>
+              <form action="/itemorders/<%= itemorder.id %>" method="post">
                 <input type="hidden" name="_method" value="put">
                 <input type="hidden" name="itemorder[id]" value="<%= itemorder.id %>">
                 <input type="hidden" name="itemorder[is_active]" value="false">
-                <input type="submit" value="Clear">
+                <input type="submit" value="Clear" class="grey-text text-lighten-3 btn">
               </form>
-            </td>
-          </tr>
-          <% end %>
-        </tbody>
-</table>
+            </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% end %>
+</div>
+
+
+<ul class="collapsible popout center-align" data-collapsible="accordion">
+   <li>
+     <div class="collapsible-header">  <h5 class="teal-text text-lighten-1">Inactive Orders</h5>
+     </div>
+     <div class="collapsible-body">
 
 <div class="row">
-  <h5 class="teal-text text-lighten-1">Inactive Orders</h5>
 </div>
 <table class="bordered s10">
         <thead>
           <tr>
               <th data-field="Table#">Order ID</th>
               <th data-field="Table#">Party ID</th>
-              <th data-field="Table#">Food Item Number</th>
               <th data-field="Table#">Food Item</th>
+              <th data-field="Table#">Quantity</th>
           </tr>
         </thead>
 
@@ -73,14 +80,18 @@
             <td>
             <%= itemorder.party_id %></td>
             <td>
-            <%= itemorder.fooditem_id %></td>
-            <td>
               <%= itemorder.fooditem.name %>
+          </td>
+            <td>
+              <%= itemorder.quantity %>
             </td>
           </tr>
           <% end %>
         </tbody>
 </table>
 
+</div>
+</li>
+</ul>
 
 </div>

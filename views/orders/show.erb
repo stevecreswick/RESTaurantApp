@@ -1,9 +1,0 @@
-<h3>Enjoy <%= @itemorder.name %></h3>
-
-<a href="/itemorders">All of them</a>
-<a href="/itemorders/<%= @order.id %>/edit">Edit</a>
-
-<form action="/itemorders/<%= @itemorder.id %>" method="post">
-  <input type="hidden" name="_method" value="delete">
-  <input type="submit" value="Done">
-</form>

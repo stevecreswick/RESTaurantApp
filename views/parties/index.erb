@@ -1,40 +1,43 @@
 <div class="container parties">
 <h5 class="teal-text text-lighten-1">Active Parties</h5>
-<table class="bordered hoverable responsive-table">
-        <thead>
-          <tr>
-              <th data-field="Table#">Check Number</th>
-              <th data-field="Table#">Table Number</th>
-              <th data-field="Table#">Number of Guests</th>
-              <th data-field="Table#">Bill</th>
-              <th data-field="Table#">Pay Bill</th>
 
+<div class="row">
+  <% @activeparties.each do |party| %>
+      <div class="col s12 m6 l4">
+        <div class="card-panel blue-grey darken-3">
+          <div class="card-content blue-text text-darken-2">
+            <div class="row">
+              <div class="col s6">
+                <h5 class="blue-grey-text text-lighten-5 left-align"><a href="/parties/<%=party.id%>">Check<br><%= party.id %></a></h5>
+          </div>
+          <div class="col s6">
+            <h5 class="blue-grey-text text-lighten-5 right-align">Table<br> <%= party.restaurant_table_id %></h5>
+          </div>
 
-          </tr>
-        </thead>
-
-        <tbody>
-        <% @activeparties.each do |party| %>
-          <tr>
-            <td><a href="/parties/<%= party.id %>">
-<%= party.id %> </a></td>
-            <td>
-            <%= party.restaurant_table_id %></td>
-            <td><%= party.number_of_guests %></td>
-            <td class="party-bill" data-paid="<%=party.paid_bill%>"><%= ActiveSupport::NumberHelper.number_to_currency(party.bill)%></td>
-            <td>
+          </div>
+          <div class="row">
+            <div class="col s5">
+                <h5 class="red-text text-accent-2 left-align"><%= ActiveSupport::NumberHelper.number_to_currency(party.bill)%></h5>
+            </div>
+            <div class="col s5 offset-s2">
               <form class="" action="/parties/<%= party.id %>" method="post">
                 <input type="hidden" name="_method" value="put">
                 <input type="hidden" name="party[id]" value="<%= party.id %>">
                 <input type="hidden" name="table_number" value="<%=party.restaurant_table_id%>">
                 <input type="hidden" name="party[paid_bill]" value="true">
-                <input type="submit" value="Pay Bill">
+                <input type="submit" value="Pay" class="btn-floating btn-large green accent-4">
               </form>
-            </td>
-          </tr>
-          <% end %>
-        </tbody>
-</table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <% end %>
+
+  </div>
+
+
 
 <br>
 <br>

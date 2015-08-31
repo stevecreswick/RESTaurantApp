@@ -95,7 +95,7 @@
     <div class="col s4 m3 l3">
     <% elsif (table.is_occupied == true) %>
     <form action="/itemorders/new" method="get" class="<%=table.shape%> center-align occupied">
-      <input type="submit" value="<%= table.id %>" class="table-input" >
+      <input type="submit" value="<%=table.id%>" class="table-input" >
       </form>
     </div>
     <%end%>

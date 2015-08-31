@@ -1,7 +1,0 @@
-<h3>Edit a New Order Item</h3>
-
-<form action="/Itemorders/<%= @order.id %>" method="post">
-  <input type="hidden" name="_method" value="put">
-  <input type="text" name="itemorder[name]" value="<%= @itemorder.name %>">
-  <input type="submit">
-</form>

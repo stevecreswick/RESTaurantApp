@@ -9,24 +9,75 @@
 </div>
 <ul class="collapsible popout" data-collapsible="accordion" style="text-align: center">
   <li>
-    <div class="collapsible-header left-align red lighten-1" style="padding-top: 1px"><h5>Active Orders</h5></div>
+    <div class="collapsible-header center-align blue-grey lighten-4" style="padding-top: 1px"><h5>Active Orders</h5></div>
     <div class="collapsible-body">
-      <table class="bordered responsive-table">
+      <div class="row">
+      <% @activeorders.each do |itemorder| %>
+      <% time_elapsed = ((Time.now - itemorder.created_at)/60).round %>
+      <% background_color ="blue-grey darken-4" %>
+      <% if (time_elapsed > 17 ) %>
+      <% background_color = "red darken-3" %>
+      <% elsif (time_elapsed >= 10) %>
+      <% background_color = "orange darken-3"%>
+      <% elsif (time_elapsed >= 5) %>
+      <% background_color = "orange lighten-3"%>
+      <% end %>
+          <div class="col s12 m6 l4">
+            <div class="card-panel <%=background_color%>" data-time="<%=time_elapsed%>" data-active="<%=itemorder.is_active%>">
+              <div class="card-content grey-text text-lighten-3">
+                <div class="row ordertime">
+                <div class="col s4">
+                <strong>Check # <%= itemorder.party_id %></strong>        </div>
+                <div class="col s8 right-align">
+                  <p><%= ((Time.now - itemorder.created_at)/60).round %> min</p>
+                </div>
+                  <div class="col s8">
+                    <h5><%= itemorder.fooditem.name %></h5>
+                  </div>
+                  <div class="col s4">
+                    <h5>x  <%= itemorder.quantity%></5>
+                  </div>
+                  <div class="col s12 ">
+                    <p>Request: <%= itemorder.special_request%></p>
+                  </div>
+                  <div class="col s12 right-align">
+                    <br>
+                    <form action="/itemorders/<%= itemorder.id %>" method="post">
+                      <input type="hidden" name="_method" value="put">
+                      <input type="hidden" name="itemorder[id]" value="<%= itemorder.id %>">
+                      <input type="hidden" name="itemorder[is_active]" value="false">
+                      <input type="submit" value="Clear" class="grey-text text-lighten-3 btn">
+                    </form>
+                  </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <% end %>
+      </div>
+
+
+      <ul class="collapsible popout center-align" data-collapsible="accordion">
+         <li>
+           <div class="collapsible-header">  <h5 class="teal-text text-lighten-1">Inactive Orders</h5>
+           </div>
+           <div class="collapsible-body">
+
+      <div class="row">
+      </div>
+      <table class="bordered s10">
               <thead>
                 <tr>
                     <th data-field="Table#">Order ID</th>
                     <th data-field="Table#">Party ID</th>
-                    <th data-field="Table#">Food Item Number</th>
                     <th data-field="Table#">Food Item</th>
                     <th data-field="Table#">Quantity</th>
-                    <th data-field="Table#">Special Request</th>
-                    <th data-field="Table#">Time Elapsed</th>
-                    <th data-field="Table#">Order Up</th>
                 </tr>
               </thead>
 
               <tbody>
-              <% @activeorders.each do |itemorder| %>
+              <% @inactiveorders.each do |itemorder| %>
                 <% time_elapsed = ((Time.now - itemorder.created_at)/60).round %>
 
                 <tr class="ordertime" data-time="<%=time_elapsed%>" data-active="<%=itemorder.is_active%>">
@@ -35,58 +86,33 @@
                   <td>
                   <%= itemorder.party_id %></td>
                   <td>
-                  <%= itemorder.fooditem_id %></td>
-                  <td>
                     <%= itemorder.fooditem.name %>
-                  </td>
+                </td>
                   <td>
-                    <%= itemorder.quantity%>
-                  </td>
-                  <td>
-                    <%= itemorder.special_request%>
-                  </td>
-                  <td>
-                    <%= ((Time.now - itemorder.created_at)/60).round %> min
-                  </td>
-                  <td>
-                    <form class="" action="/itemorders/<%= itemorder.id %>" method="post">
-                      <input type="hidden" name="_method" value="put">
-                      <input type="hidden" name="itemorder[id]" value="<%= itemorder.id %>">
-                      <input type="hidden" name="itemorder[is_active]" value="false">
-                      <input type="submit" value="Clear">
-                    </form>
+                    <%= itemorder.quantity %>
                   </td>
                 </tr>
                 <% end %>
               </tbody>
       </table>
-      <div class="divider">
+
       </div>
-      <br><br>
-<div class="row">
-  <div class="col s6 offset-s5 right-align">
-    <form action="/itemorders" method="get">
-      <input type="submit" value="All Orders">
-    </form>
-  </div>
-</div>
+      </li>
+      </ul>
 </div>
 </li>
 </ul>
 
-<div class="divider">
-
-</div>
-
+<br>
 <ul class="collapsible popout" data-collapsible="accordion" style="text-align: center">
   <li>
-    <div class="collapsible-header left-align red lighten-1" style="padding-top: 1px"><h5>Manage Menu</h5></div>
+    <div class="collapsible-header center-align blue-grey lighten-4" style="padding-top: 1px"><h5>Manage Menu</h5></div>
     <div class="collapsible-body">
       <div class="section">
         <div class="row">
           <div class="col s12">
             <form action="/fooditems/new" method="get">
-              <input type="submit" value="Create New Menu Item">
+              <input type="submit" value="Create New Menu Item" class="btn">
             </form>
           </div>
         </div>
@@ -112,15 +138,15 @@
               <% unavailable = "style='border: red 4px solid'"%>
               <%end%>
               <% if (fooditem.course == "Appetizer") %>
-              <div class="col s12 m6 l4">
-                <div class="card-panel  deep-purple lighten-5 hoverable"  <%=unavailable%>>
+              <div class="col s12 m6 l6">
+                <div class="card-panel  blue-grey darken-4 hoverable"  <%=unavailable%>>
                   <div class="card-content blue-text text-darken-2">
                     <div class="row">
                       <div class="col s9">
-                        <%= fooditem.name %>
+                        <h5 class="blue-grey-text text-lighten-5"> <%= fooditem.name %> </h5>
                       </div>
                       <div class="col s3">
-                        <%= ActiveSupport::NumberHelper.number_to_currency(fooditem.price)%>
+                      <h5 class="green-text text-accent-3">   <%= ActiveSupport::NumberHelper.number_to_currency(fooditem.price)%> </h5>
                       </div>
                     </div>
                   <div class="row">
@@ -128,19 +154,19 @@
                       <form action="/fooditems/<%= fooditem.id %>" method="post">
                         <input type="hidden" name="_method" value="put">
                         <input type="hidden" name="fooditem[available]" value="false">
-                        <input type="submit" value="86">
+                        <input type="submit" value="86" class="btn-floating btn-large">
                       </form>
                     </div>
                     <div class="col s5">
                       <form action="/fooditems/<%= fooditem.id %>" method="post">
                         <input type="hidden" name="_method" value="put">
                         <input type="hidden" name="fooditem[available]" value="true">
-                        <input type="submit" value="In-Stock">
+                        <input type="submit" value="Avail" class="btn-floating btn-large">
                       </form>
                     </div>
                   <div class="col s3">
                     <form action="/fooditems/<%= fooditem.id %>/edit" method="get">
-                      <input type="submit" value="Edit">
+                      <input type="submit" value="Edit" class="btn-floating btn-large">
                     </form>
                   </div>
                 </div>
@@ -161,15 +187,15 @@
             <% unavailable = "style='border: red 4px solid'"%>
             <%end%>
             <% if (fooditem.course == "Entree") %>
-            <div class="col s12 m6 l4">
-              <div class="card-panel  deep-purple lighten-5 hoverable"  <%=unavailable%>>
+            <div class="col s12 m6 l6">
+              <div class="card-panel  blue-grey darken-4 hoverable"  <%=unavailable%>>
                 <div class="card-content blue-text text-darken-2">
                   <div class="row">
                     <div class="col s9">
-                      <%= fooditem.name %>
+                      <h5 class="blue-grey-text text-lighten-5"> <%= fooditem.name %> </h5>
                     </div>
                     <div class="col s3">
-                      <%= ActiveSupport::NumberHelper.number_to_currency(fooditem.price)%>
+                    <h5 class="green-text text-accent-3">   <%= ActiveSupport::NumberHelper.number_to_currency(fooditem.price)%> </h5>
                     </div>
                   </div>
                   <div class="row">
@@ -177,19 +203,19 @@
                       <form action="/fooditems/<%= fooditem.id %>" method="post">
                         <input type="hidden" name="_method" value="put">
                         <input type="hidden" name="fooditem[available]" value="false">
-                        <input type="submit" value="86">
+                        <input type="submit" value="86" class="btn-floating btn-large">
                       </form>
                     </div>
                     <div class="col s5">
                       <form action="/fooditems/<%= fooditem.id %>" method="post">
                         <input type="hidden" name="_method" value="put">
                         <input type="hidden" name="fooditem[available]" value="true">
-                        <input type="submit" value="In-Stock">
+                        <input type="submit" value="Avail" class="btn-floating btn-large">
                       </form>
                     </div>
                   <div class="col s3">
                     <form action="/fooditems/<%= fooditem.id %>/edit" method="get">
-                      <input type="submit" value="Edit">
+                      <input type="submit" value="Edit" class="btn-floating btn-large">
                     </form>
                   </div>
                 </div>
@@ -210,15 +236,15 @@
             <% unavailable = "style='border: red 4px solid'"%>
             <%end%>
             <% if (fooditem.course == "Sides") %>
-            <div class="col s12 m6 l4">
-              <div class="card-panel  deep-purple lighten-5 hoverable"  <%=unavailable%>>
+            <div class="col s12 m6 l6">
+              <div class="card-panel  blue-grey darken-4 hoverable"  <%=unavailable%>>
                 <div class="card-content blue-text text-darken-2">
                   <div class="row">
                     <div class="col s9">
-                      <%= fooditem.name %>
+                      <h5 class="blue-grey lighten-5"> <h5 class="blue-grey-text text-lighten-5"> <%= fooditem.name %> </h5> </h5>
                     </div>
                     <div class="col s3">
-                      <%= ActiveSupport::NumberHelper.number_to_currency(fooditem.price)%>
+                    <h5 class="green-text text-accent-3">   <%= ActiveSupport::NumberHelper.number_to_currency(fooditem.price)%> </h5>
                     </div>
                   </div>
                   <div class="row">
@@ -226,19 +252,19 @@
                       <form action="/fooditems/<%= fooditem.id %>" method="post">
                         <input type="hidden" name="_method" value="put">
                         <input type="hidden" name="fooditem[available]" value="false">
-                        <input type="submit" value="86">
+                        <input type="submit" value="86" class="btn-floating btn-large">
                       </form>
                     </div>
                     <div class="col s5">
                       <form action="/fooditems/<%= fooditem.id %>" method="post">
                         <input type="hidden" name="_method" value="put">
                         <input type="hidden" name="fooditem[available]" value="true">
-                        <input type="submit" value="In-Stock">
+                        <input type="submit" value="Avail" class="btn-floating btn-large">
                       </form>
                     </div>
                   <div class="col s3">
                     <form action="/fooditems/<%= fooditem.id %>/edit" method="get">
-                      <input type="submit" value="Edit">
+                      <input type="submit" value="Edit" class="btn-floating btn-large">
                     </form>
                   </div>
                 </div>
@@ -259,15 +285,15 @@
             <% unavailable = "style='border: red 4px solid'"%>
             <%end%>
             <% if (fooditem.course == "Drink") %>
-            <div class="col s12 m6 l4">
-              <div class="card-panel  deep-purple lighten-5 hoverable"  <%=unavailable%>>
+            <div class="col s12 m6 l6">
+              <div class="card-panel  blue-grey darken-4 hoverable"  <%=unavailable%>>
                 <div class="card-content blue-text text-darken-2">
                   <div class="row">
                     <div class="col s9">
-                      <%= fooditem.name %>
+                      <h5 class="blue-grey lighten-5"> <h5 class="blue-grey-text text-lighten-5"> <%= fooditem.name %> </h5> </h5>
                     </div>
                     <div class="col s3">
-                      <%= ActiveSupport::NumberHelper.number_to_currency(fooditem.price)%>
+                    <h5 class="green-text text-accent-3">   <%= ActiveSupport::NumberHelper.number_to_currency(fooditem.price)%> </h5>
                     </div>
                   </div>
                   <div class="row">
@@ -275,19 +301,19 @@
                       <form action="/fooditems/<%= fooditem.id %>" method="post">
                         <input type="hidden" name="_method" value="put">
                         <input type="hidden" name="fooditem[available]" value="false">
-                        <input type="submit" value="86">
+                        <input type="submit" value="86" class="btn-floating btn-large">
                       </form>
                     </div>
                     <div class="col s5">
                       <form action="/fooditems/<%= fooditem.id %>" method="post">
                         <input type="hidden" name="_method" value="put">
                         <input type="hidden" name="fooditem[available]" value="true">
-                        <input type="submit" value="In-Stock">
+                        <input type="submit" value="Avail" class="btn-floating btn-large">
                       </form>
                     </div>
                   <div class="col s3">
                     <form action="/fooditems/<%= fooditem.id %>/edit" method="get">
-                      <input type="submit" value="Edit">
+                      <input type="submit" value="Edit" class="btn-floating btn-large">
                     </form>
                   </div>
                 </div>
@@ -308,15 +334,15 @@
             <% unavailable = "style='border: red 4px solid'"%>
             <%end%>
             <% if (fooditem.course == "Dessert") %>
-            <div class="col s12 m6 l4">
-              <div class="card-panel  deep-purple lighten-5 hoverable"  <%=unavailable%>>
+            <div class="col s12 m6 l6">
+              <div class="card-panel  blue-grey darken-4 hoverable"  <%=unavailable%>>
                 <div class="card-content blue-text text-darken-2">
                   <div class="row">
                     <div class="col s9">
-                      <%= fooditem.name %>
+                      <h5 class="blue-grey-text text-lighten-5"> <%= fooditem.name %> </h5>
                     </div>
                     <div class="col s3">
-                      <%= ActiveSupport::NumberHelper.number_to_currency(fooditem.price)%>
+                    <h5 class="green-text text-accent-3">   <%= ActiveSupport::NumberHelper.number_to_currency(fooditem.price)%> </h5>
                     </div>
                   </div>
                   <div class="row">
@@ -324,19 +350,19 @@
                       <form action="/fooditems/<%= fooditem.id %>" method="post">
                         <input type="hidden" name="_method" value="put">
                         <input type="hidden" name="fooditem[available]" value="false">
-                        <input type="submit" value="86">
+                        <input type="submit" value="86" class="btn-floating btn-large">
                       </form>
                     </div>
                     <div class="col s5">
                       <form action="/fooditems/<%= fooditem.id %>" method="post">
                         <input type="hidden" name="_method" value="put">
                         <input type="hidden" name="fooditem[available]" value="true">
-                        <input type="submit" value="In-Stock">
+                        <input type="submit" value="Avail" class="btn-floating btn-large">
                       </form>
                     </div>
                   <div class="col s3">
                     <form action="/fooditems/<%= fooditem.id %>/edit" method="get">
-                      <input type="submit" value="Edit">
+                      <input type="submit" value="Edit" class="btn-floating btn-large">
                     </form>
                   </div>
                 </div>
@@ -356,19 +382,18 @@
 
 
 
-<div class="divider"></div>
 
 
 <div class="section">
   <ul class="collapsible popout" data-collapsible="accordion" style="text-align: center">
       <li>
-        <div class="collapsible-header left-align red lighten-1" style="padding-top: 1px"><h5>Manage Tables</h5></div>
+        <div class="collapsible-header center-align blue-grey lighten-4" style="padding-top: 1px"><h5>Manage Tables</h5></div>
         <div class="collapsible-body">
           <br>
   <div class="row">
     <div class="col s12">
       <form action="/restaurant_tables/new" method="get">
-        <input type="submit" value="Create New Table">
+        <input type="submit" value="Create New Table" class="btn">
       </form>
     </div>
   </div>

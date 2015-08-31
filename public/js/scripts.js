@@ -62,7 +62,7 @@ function checkBillPaid(){
 
 function colorBillGreen(singleBill) {
       console.log(singleBill);
-      singleBill.css({'color': 'green'});
+      singleBill.css({'color': 'rgb(0,250,154)'});
 };
 
 function colorBillRed(singleBill) {
